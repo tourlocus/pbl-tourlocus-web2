@@ -15,13 +15,17 @@
             <div class="input">
               <input
                 type="text"
+                placeholder="hogehoge"
                 v-model.trim="form.name"
                 name="name"
                 autocomplete="off"
                 v-validate="'required|max:20'"
               />
             </div>
-            <div v-if="errors.has('name')">
+            <div
+              class="form__error"
+              v-if="errors.has('name')"
+            >
               ユーザー名は必須です
             </div>
           </div>
@@ -32,12 +36,16 @@
               <input
                 name="email"
                 type="email"
+                placeholder="hogehoge@example.com"
                 v-validate="'required'"
                 autocomplete="off"
                 v-model.trim="form.email"
               />
             </div>
-            <div v-if="errors.has('email')">
+            <div
+              class="form__error"
+              v-if="errors.has('email')"
+            >
               メールアドレスは必須です
             </div>
           </div>
@@ -54,7 +62,10 @@
                     v-model.trim="form.password"
                   />
                 </div>
-                <div v-if="errors.has('password')">
+                <div
+                  class="form__error"
+                  v-if="errors.has('password')"
+                >
                   パスワードは必須です
                 </div>
                 <small v-else-if="form.password <= 8">
@@ -73,7 +84,10 @@
               </div>
             </div>
 
-            <div v-if="passwordCheck">
+            <div
+              class="form__error"
+              v-if="passwordCheck"
+            >
               パスワードが一致していません
             </div>
           </div>
@@ -84,13 +98,24 @@
               <input
                 type="text"
                 name="birthday"
-                v-validate="'required'"
+                placeholder="1996-04-01"
+                v-validate="'required|date_format:YYYY-MM-DD'"
                 autocomplete="off"
                 v-model.trim="form.birthday"
               />
             </div>
 
-            <div v-if="errors.has('birthday')">
+            <div
+              class="form__error"
+              v-if="birthdayCheck"
+            >
+              ありえない年齢が入力されています
+            </div>
+
+            <div
+              class="form__error"
+              v-else-if="errors.has('birthday') && !birthdayCheck"
+            >
               生年月日は必須です
             </div>
           </div>
@@ -104,7 +129,8 @@
                     type="radio"
                     id="man"
                     name="gender"
-                    v-validate="'required'"
+                    value="0"
+                    v-validate="'required|included:0,1'"
                     v-model="form.gender"
                   />
                   <label for="man">男 性</label>
@@ -115,6 +141,7 @@
                     type="radio"
                     id="woman"
                     name="gender"
+                    value="1"
                     v-model="form.gender"
                   />
                   <label for="woman">女性</label>
@@ -123,7 +150,10 @@
               </div>
             </div>
 
-            <div v-if="errors.has('gender')">
+            <div
+              class="form__error"
+              v-if="errors.has('gender')"
+            >
               性別は必須です
             </div>
           </div>
@@ -165,6 +195,18 @@ export default {
           return false
         } else {
           return true
+        }
+      }
+    },
+
+    birthdayCheck () {
+      if (this.form.birthday) {
+        const inputYear = new Date(this.form.birthday).getFullYear()
+        const NowYear = new Date().getFullYear()
+        if (NowYear - inputYear > 100) {
+          return true
+        } else {
+          return false
         }
       }
     },

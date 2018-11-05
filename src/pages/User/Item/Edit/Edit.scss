@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+  width: 960px;
+  margin: 20px;
+  padding: 32px 20px;
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
+}
+
+.w__form {
+  padding: 0 20px;
+}
+
+.w__field {
+
+  label {
+    font-size: 16px;
+    color: #555;
+  }
+
+  .input {
+
+    input {
+      width: 100%;
+      height: 48px;
+      color: #555;
+      font-size: 16px;
+      outline: 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      text-indent: 10px;
+    }
+
+    textarea {
+      height: 240px;
+      color: #555;
+      font-size: 16px;
+      outline: 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      resize: none;
+      width: calc(100% - 20px);
+      padding: 16px 10px;
+      line-height: 1.75;
+    }
+  }
+}
+
+.w__field-tag {
+  label {
+    font-size: 16px;
+    color: #555;
+  }
+}
+
+.vue-input-tag-wrapper {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  color: #555;
+  font-size: 16px;
+  padding: 8px 10px 7px;;
+}
+
+.w__field-file {
+  label {
+    display: inline-block;
+    border: 2px solid #ffbf7f;
+    padding: 8px 16px;
+    color: #555;
+    font-size: 16px;
+    border-radius: 3px;
+
+
+    &:hover {
+      background: #ffbf7f;
+      color: #fff;
+    }
+  }
+
+  input {
+    display: none;
+  }
+
+  img {
+    height: 300px;
+    width: 100%;
+  }
+}
+
+.actionBtn {
+  display: flex;
+  justify-content: center;
+
+  input {
+    outline: 0;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    font-size: 18px;
+    color: #fff;
+    width: 320px;
+    background-color: #42b983;
+    padding: 8px 0;
+  }
+}
+
+.mt20mb20 {
+  margin: 32px 0;
+}
+
+
+@media only screen and (max-width: 991px) {}
+@media only screen and (max-width: 768px) {
+  .container {
+    padding: 0 20px;
+  }
+
+  .main {
+    width: 100%;
+  }
+
+  .actionBtn {
+    input {
+      width: 100%
+    }
+  }
+}

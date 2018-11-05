@@ -22,7 +22,7 @@
       <template>
         <div class="w__before-login pc-only">
           <router-link to="/signup">新規登録</router-link>
-          <router-link to="/">ログイン</router-link>
+          <router-link to="/signin">ログイン</router-link>
         </div>
         <div class="w__before-login tablet-only">
           <el-dropdown trigger="click">
