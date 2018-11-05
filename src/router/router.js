@@ -3,6 +3,7 @@ import {
   SignUp,
   SignIn,
   User,
+  Setting,
   NotFound
 } from '../pages'
 
@@ -10,6 +11,16 @@ const routes = [
   { path: '/', name: 'Top', component: Top },
   { path: '/signup', name: 'SignUp', component: SignUp },
   { path: '/signin', name: 'SignIn', component: SignIn },
+  {
+    path: '/settings',
+    component: Setting.Container,
+    children: [
+      { path: '/', redirect: 'account' },
+      { path: 'account', name: 'Account', component: Setting.Account },
+      { path: 'password', name: 'Password', component: Setting.Password },
+      { path: 'notification', name: 'Notification', component: Setting.Notification }
+    ]
+  },
   {
     path: '/:params',
     component: User.Container,
