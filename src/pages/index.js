@@ -1,4 +1,6 @@
 export {Top} from './Top'
 export {SignUp} from './SignUp'
 export {SignIn} from './SignIn'
+export {User} from './User'
+export {Setting} from './Setting'
 export {NotFound} from './NotFound'

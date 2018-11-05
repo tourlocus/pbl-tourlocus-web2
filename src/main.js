@@ -3,7 +3,6 @@ import VeeValidate from 'vee-validate'
 
 // Element UI
 import ElementUI from 'element-ui'
-import locale from 'element-ui/lib/umd/locale/ja'
 import 'element-ui/lib/theme-chalk/index.css'
 
 //
@@ -14,7 +13,7 @@ import {sync} from 'vuex-router-sync'
 
 //
 sync(store, router)
-Vue.use(ElementUI, {locale})
+Vue.use(ElementUI)
 Vue.use(VeeValidate)
 Vue.config.productionTip = false
 
