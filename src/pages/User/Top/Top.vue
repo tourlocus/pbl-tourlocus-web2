@@ -32,7 +32,8 @@ export default {
   name: 'MyPage',
   components: {
     ProfileBox
-  }
+  },
+  computed: {}
 }
 </script>
 

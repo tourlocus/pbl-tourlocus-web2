@@ -9,7 +9,10 @@
 
           <div class="w__field-tag">
             <label>タグ</label>
-            <input-tag :limit="5" />
+            <input-tag
+              v-model.trim="form.tags"
+              :limit="5"
+            />
           </div>
 
           <div class="w__field mt20mb20">
@@ -18,6 +21,7 @@
               <input
                 type="text"
                 name="title"
+                v-model.trim="form.title"
                 v-validate="'required'"
               />
             </div>
@@ -59,6 +63,7 @@
             <div class="input">
               <textarea
                 name="content"
+                v-model.trim="form.content"
                 v-validate="'required'"
               />
             </div>
@@ -85,6 +90,7 @@
 
 <script>
 import InputTag from 'vue-input-tag'
+import {mapActions} from 'vuex'
 
 export default {
   name: 'ItemCreate',
@@ -93,14 +99,22 @@ export default {
   },
   data () {
     return {
+      form: {
+        tags: [],
+        title: '',
+        files: [],
+        content: ''
+      },
       images: []
     }
   },
   methods: {
+    ...mapActions('article', ['createItem']),
     handleChangeFile (e) {
       e.preventDefault()
 
       if (e.target.files.length !== 0) {
+        this.form.files.length = 0
         this.images.length = 0
         const files = e.target.files
 
@@ -110,6 +124,7 @@ export default {
       }
     },
     showImage (file) {
+      this.form.files.push(file)
       const reader = new FileReader()
       const vm = this
       reader.onload = e => {
@@ -120,6 +135,7 @@ export default {
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
+          this.createItem(this.form)
         }
       })
     }
