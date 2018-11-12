@@ -172,6 +172,7 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
 
 export default {
   name: 'SignUp',
@@ -225,10 +226,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['signUp']),
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
-          console.log('ok')
+          this.signUp(this.form)
         }
       })
     }

@@ -2,6 +2,7 @@ import {
   Top,
   SignUp,
   SignIn,
+  SignOut,
   User,
   Setting,
   NotFound
@@ -9,8 +10,9 @@ import {
 
 const routes = [
   { path: '/', name: 'Top', component: Top },
-  { path: '/signup', name: 'SignUp', component: SignUp },
-  { path: '/signin', name: 'SignIn', component: SignIn },
+  { path: '/signup', name: 'SignUp', component: SignUp, meta: {beforeOnly: true} },
+  { path: '/signin', name: 'SignIn', component: SignIn, meta: {beforeOnly: true} },
+  { path: '/signout', name: 'SignOut', component: SignOut },
   {
     path: '/settings',
     component: Setting.Container,
