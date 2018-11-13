@@ -1,8 +1,9 @@
 import axios from 'axios'
+import router from '../../router'
 // import * as types from './mutation-type'
 
 export default {
-  async createItem ({commit}, value) {
+  async createItem ({rootState}, value) {
     const url = 'items/create'
     const headers = JSON.parse(localStorage.getItem('key'))
 
@@ -27,7 +28,8 @@ export default {
     })
 
     if (response.status === 200) {
-      console.log(response.data)
+      const userName = rootState.auth.userName
+      router.push()
     }
   }
 }
