@@ -32,7 +32,8 @@ const routes = [
       { path: 'followers', name: 'Followers', component: User.Followers },
       { path: 'items/create', name: 'ItemCreate', component: User.Item.Create },
       { path: 'items/edit/:id', name: 'ItemEdit', component: User.Item.Edit },
-      { path: 'items/:id', name: 'ItemDetail', component: User.Item.Detail }
+      { path: 'items/:id', name: 'ItemDetail', component: User.Item.Detail },
+      { path: 'presents/create', name: 'PresentCreate', component: User.Present.Create }
     ]
   },
   { path: '*', name: 'NotFound', component: NotFound }

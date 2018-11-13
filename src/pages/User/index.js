@@ -2,6 +2,7 @@ import {Top} from './Top'
 import {Favorite} from './Favorite'
 import {Followers} from './Followers'
 import {Item} from './Item'
+import {Present} from './Present'
 import {Container} from './Container'
 
 export const User = {
@@ -9,5 +10,6 @@ export const User = {
   Top,
   Favorite,
   Followers,
-  Item
+  Item,
+  Present
 }
