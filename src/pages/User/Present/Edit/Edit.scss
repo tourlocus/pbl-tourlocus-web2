@@ -1,0 +1,332 @@
+.container {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .main {
+    width: 960px;
+    height: auto;
+    margin: 20px;
+    padding: 32px 20px;
+    background-color: #fff;
+    border-radius: 3px;
+    box-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
+  }
+  
+  .amount {
+    label {
+      font-size: 16px;
+      color: #555;
+    }
+  
+      input {
+        width: 10%;
+        height: 25px;
+        color: #555;
+        font-size: 16px;
+        outline: 0;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        text-indent: 10px;
+      }
+  }
+  
+  .price{
+    label {
+      font-size: 16px;
+      color: #555;
+    }
+  
+    input {
+      width: 100px;
+      height: 25px;
+      color: #555;
+      font-size: 16px;
+      outline: 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      text-indent: 10px;
+    }
+  
+    textarea {
+      height: 240px;
+      color: #555;
+      font-size: 16px;
+      outline: 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      resize: none;
+      width: calc(100% - 20px);
+      padding: 16px 10px;
+      line-height: 1.75;
+    }
+  }
+  
+  .cp_ipselect {
+      position: relative;
+      width: 50%;
+      margin-top: 20px;
+    margin-left: 0px;
+  
+      text-align: center;
+  }
+  .cp_sl06 {
+      position: relative;
+      font-family: inherit;
+      background-color: transparent;
+      width: 100%;
+      padding: 10px 10px 10px 0;
+      font-size: 18px;
+      border-radius: 0;
+      border: none;
+      border-bottom: 1px solid rgba(0,0,0, 0.3);
+  }
+  .cp_sl06:focus {
+      outline: none;
+      border-bottom: 1px solid rgba(0,0,0, 0);
+  }
+  .cp_ipselect .cp_sl06 {
+      appearance: none;
+      -webkit-appearance:none
+  }
+  .cp_ipselect select::-ms-expand {
+      display: none;
+  }
+  .cp_ipselect:after {
+      position: absolute;
+      top: 18px;
+      right: 10px;
+      width: 0;
+      height: 0;
+      padding: 0;
+      content: '';
+      border-left: 6px solid transparent;
+      border-right: 6px solid transparent;
+      border-top: 6px solid rgba(0, 0, 0, 0.3);
+      pointer-events: none;
+  }
+  .cp_sl06_selectlabel {
+      color: rgba(0,0,0, 0.5);
+      font-size: 18px;
+      font-weight: normal;
+      position: absolute;
+      pointer-events: none;
+      left: 0;
+      top: 10px;
+      transition: 0.2s ease all;
+  }
+  .cp_sl06:focus ~ .cp_sl06_selectlabel, .cp_sl06:valid ~ .cp_sl06_selectlabel {
+      color: #da3c41;
+      top: -20px;
+      transition: 0.2s ease all;
+      font-size: 14px;
+  }
+  .cp_sl06_selectbar {
+      position: relative;
+      display: block;
+      width: 100%;
+  }
+  .cp_sl06_selectbar:before, .cp_sl06_selectbar:after {
+      content: '';
+      height: 2px;
+      width: 0;
+      bottom: 1px;
+      position: absolute;
+      background: #da3c41;
+      transition: 0.2s ease all;
+  }
+  .cp_sl06_selectbar:before {
+      left: 50%;
+  }
+  .cp_sl06_selectbar:after {
+      right: 50%;
+  }
+  .cp_sl06:focus ~ .cp_sl06_selectbar:before, .cp_sl06:focus ~ .cp_sl06_selectbar:after {
+      width: 50%;
+  }
+  .cp_sl06_highlight {
+      position: absolute;
+      top: 25%;
+      left: 0;
+      pointer-events: none;
+      opacity: 0.5;
+  }
+  
+  .w__form {
+    padding: 0 20px;
+  }
+  
+  .w__field {
+  
+    label {
+      font-size: 16px;
+      color: #555;
+    }
+  
+    .input {
+  
+      input {
+        width: 100%;
+        height: 48px;
+        color: #555;
+        font-size: 16px;
+        outline: 0;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        text-indent: 10px;
+      }
+  
+      textarea {
+        height: 240px;
+        color: #555;
+        font-size: 16px;
+        outline: 0;
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        resize: none;
+        width: calc(100% - 20px);
+        padding: 16px 10px;
+        line-height: 1.75;
+      }
+    }
+  }
+  
+  .w__field-tag {
+    label {
+      font-size: 16px;
+      color: #555;
+    }
+  }
+  
+  .vue-input-tag-wrapper {
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    color: #555;
+    font-size: 16px;
+    padding: 8px 10px 7px;;
+  }
+  
+  .w__field-file {
+    label {
+      display: inline-block;
+      border: 2px solid #ffbf7f;
+      padding: 8px 16px;
+      color: #555;
+      font-size: 16px;
+      border-radius: 3px;
+  
+  
+      &:hover {
+        background: #ffbf7f;
+        color: #fff;
+      }
+    }
+  
+    input {
+      display: none;
+    }
+  
+    img {
+      height: 300px;
+      width: 100%;
+    }
+  }
+  
+  .actionBtn {
+    display: flex;
+    justify-content: center;
+  
+    input {
+      outline: 0;
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      font-size: 18px;
+      color: #fff;
+      width: 320px;
+      background-color: #42b983;
+      padding: 8px 0;
+    }
+  }
+  
+  .mt20mb20 {
+    margin: 32px 0;
+  }
+  
+  .w__image {
+    margin: 10px 10px 10px 0px;
+  
+  }
+  
+  .file{
+    display: inline-block;
+    overflow: hidden;
+    position: relative;
+    padding: 0.3em 1em;
+    border: 1px solid #ffbf7f;
+    color: black;
+    text-decoration: none;
+    transition: .4s;
+    border-radius: 3px;
+  }
+  
+  .file:hover{
+    background: #ffbf7f;
+    color: white;
+  }
+  
+  .file input[type="file"]{
+    opacity: 0;
+    filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0);
+    position: absolute;
+    right: 0;
+    top: 0;
+    margin: 0;
+    font-size: 100px;
+    cursor: pointer;
+  }
+  
+  button {
+    display: inline-block;
+    height: 50px;
+    width: 50px;
+    font-size: 40px;
+    float: right;
+    outline: none;
+    text-decoration: none;
+    border-radius: 50%;
+    color: white;
+    background-color: #ffbf7f;
+    transition: .4s;
+    position: fixed;
+    top: 100px;
+    right: 160px;
+    z-index: 999;
+  }
+  
+  .showimg{
+    max-width: 700px;
+    max-height: 700px;
+  }
+  
+  @media only screen and (max-width: 991px) {}
+  @media only screen and (max-width: 768px) {
+    .container {
+      padding: 0 20px;
+    }
+  
+    .main {
+      width: 100%;
+    }
+  
+    .actionBtn {
+      input {
+        width: 100%
+      }
+    }
+    button {
+      top: 80px;
+      right: 50px;
+      z-index: 999;
+    }
+  }
+  
