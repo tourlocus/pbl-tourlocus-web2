@@ -17,22 +17,49 @@ export default {
       const result = response.data
       const header = response.headers
 
-      const saveData = {
+      const userInfo = {
         name: result.data.name,
+        icon: `${process.env.NODE_SLS}uploads/${result.data.icon}`,
+        intro: result.data.intro
+      }
+
+      const accessInfo = {
         accessToken: header['access-token'],
         uid: header['uid'],
         client: header['client']
       }
-      localStorage.setItem('key', JSON.stringify(saveData))
-      commit(types.LOGIN, saveData)
-      router.push(`/${saveData.name}`)
+
+      commit(types.LOGIN, {userInfo, accessInfo})
+      router.push(`/users/${userInfo.name}`)
     }
   },
 
-  restore ({commit}) {
-    const data = localStorage.getItem('key')
-    if (data) {
-      commit(types.LOGIN, JSON.parse(data))
+  async signIn ({commit}, values) {
+    const endpoints = 'auth/sign_in'
+
+    const response = await axios({
+      url: `${process.env.NODE_SLS}${endpoints}`,
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      data: JSON.stringify(values)
+    })
+
+    if (response.status === 200) {
+      const result = response.data
+      const header = response.headers
+
+      const userInfo = {
+        name: result.data.name
+      }
+
+      const accessInfo = {
+        accessToken: header['access-token'],
+        uid: header['uid'],
+        client: header['client']
+      }
+
+      commit(types.LOGIN, {userInfo, accessInfo})
+      router.push(`/users/${userInfo.name}`)
     }
   }
 }

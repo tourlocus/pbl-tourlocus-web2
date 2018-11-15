@@ -3,6 +3,6 @@ export default {
     return state.loggedIn
   },
   loginUserName: state => {
-    return state.userName
+    return state.userInfo.name
   }
 }

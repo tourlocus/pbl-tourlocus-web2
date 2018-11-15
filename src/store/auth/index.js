@@ -5,8 +5,9 @@ import getters from './getters'
 export default {
   namespaced: true,
   state: {
-    userName: null,
-    loggedIn: null
+    loggedIn: null,
+    userInfo: {},
+    accessInfo: {}
   },
   getters,
   mutations,

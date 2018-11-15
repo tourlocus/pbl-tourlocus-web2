@@ -1,13 +1,179 @@
 .container {
   display: flex;
   justify-content: center;
+  padding: 20px 20px 80px;
 }
 
 .main {
   width: 960px;
-  margin: 20px;
-  padding: 32px 20px;
-  background-color: #fff;
+}
+
+.w__item-main {
+  padding: 32px 20px 48px;
   border-radius: 3px;
   box-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
+  background: #fff;
+  margin-bottom: 64px;
+}
+
+.w__item-header {
+  display: flex;
+
+  a {
+    display: flex;
+    text-decoration: none;
+  }
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+
+  h3 {
+    font-size: 22px;
+    margin: 0;
+    padding: 0 8px;
+    color: #555;
+  }
+
+  p {
+    margin: 0;
+    position: relative;
+    top: 7px;
+    color: #555;    
+  }
+}
+
+.w__item-title {
+  h3 {
+    font-size: 22px;
+    color: #555;
+    margin: 16px 0;
+  }
+}
+
+.w__item-tag {
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    padding-right: 6px;
+  }
+
+  a {
+    font-size: 16px;
+    color: #555;
+    text-decoration: none;
+
+    &:hover {
+      text-decoration: underline;
+      opacity: 0.8;
+    }
+  }
+}
+
+.w__media {
+  img {
+    width: auto;
+    height: 300px;
+  }
+}
+
+.w__content {
+  p {
+    color: #555;
+    font-size: 18px;
+    padding: 4px 0;
+    margin: 0;
+    border-bottom: 2px solid #f0f0f0;
+  }
+
+}
+
+.comment-main {
+  padding: 32px 20px;
+  border-radius: 3px;
+  box-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
+  background: #fff;
+}
+
+.comment-header {
+  display: flex;
+  margin-bottom: 24px;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 18px;
+    padding: 0 8px;
+    color: #555;
+    position: relative;
+    top: 8px;
+  }
+}
+
+.comment-body {
+  textarea {
+    width: calc(100% - 20px);
+    height: 20vh;
+    padding: 16px 10px;
+    resize: none;
+    font-size: 16px;
+  }
+}
+
+.comment-footer {
+  display: flex;
+  justify-content: flex-end;
+
+  input {
+    padding: 4px 16px;
+    outline: 0;
+    border: 1px solid #f0f0f0;
+    border-radius: 3px;
+    font-size: 16px;
+    background-color: #42b983;
+    color: #fff;
+  }
+}
+
+.mt20mb20 {
+  margin: 36px 0;
+}
+
+
+@media only screen and (max-width: 991px) {}
+@media only screen and (max-width: 768px) {
+  .main {
+    width: 100%;
+  }
+
+  .w__media {
+    img {
+      width: 100%;
+    }
+  }
+
+  .comment-main {}
+
+  .comment-body {
+    textarea {
+      height: 80px;
+    }
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .w__item-header {
+    display: block;
+  }
 }

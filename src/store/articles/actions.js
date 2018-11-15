@@ -1,11 +1,11 @@
 import axios from 'axios'
 import router from '../../router'
-// import * as types from './mutation-type'
+import * as types from './mutation-type'
 
 export default {
   async createItem ({rootState}, value) {
     const url = 'items/create'
-    const headers = JSON.parse(localStorage.getItem('key'))
+    const info = rootState.auth
 
     const form = new FormData()
     form.append('title', value.title)
@@ -19,17 +19,56 @@ export default {
       url: `${process.env.NODE_SLS}${url}`,
       method: 'POST',
       headers: {
-        client: headers['client'],
-        uid: headers['uid'],
-        'access-token': headers['accessToken'],
+        client: info.accessInfo['client'],
+        uid: info.accessInfo['uid'],
+        'access-token': info.accessInfo['accessToken'],
         'Content-Type': 'multipart/form-data'
       },
       data: form
     })
 
     if (response.status === 200) {
-      const userName = rootState.auth.userName
-      router.push()
+      const userName = info.userInfo.name
+      router.push(`/users/${userName}`)
     }
+  },
+
+  // GET_ITEM
+  async getItem ({rootState, commit}, id) {
+    const url = `items/edit/${id}`
+    const info = rootState.auth
+
+    const response = await axios({
+      url: `${process.env.NODE_SLS}${url}`,
+      method: 'GET',
+      headers: {
+        client: info.accessInfo['client'],
+        uid: info.accessInfo['uid'],
+        'access-token': info.accessInfo['accessToken']
+      }
+    })
+
+    if (response.status === 200) {
+      const result = response.data
+      const {title, content} = result
+      const media = []
+      const tags = []
+
+      for (let i = 0; i < result.media.length; i++) {
+        const f = `${process.env.NODE_SLS}${result.media[i].media.url}`
+        media.push(f)
+      }
+
+      for (let i = 0; i < result.tags.length; i++) {
+        tags.push(result.tags[i].name)
+      }
+
+      commit(types.GET_ITEM, {title, content, media, tags})
+    }
+  },
+
+  // CHANGE_MEDIA_FILE
+  changeMediaFile ({commit}, file) {
+    commit(types.CHANGE_MEDIA_FILE, file)
   }
 }

@@ -17,6 +17,7 @@
               <input
                 type="email"
                 name="email"
+                v-model.trim="form.email"
                 v-validate="'required'"
               />
             </div>
@@ -34,6 +35,7 @@
               <input
                 type="password"
                 name="password"
+                v-model.trim="form.password"
                 v-validate="'required'"
               />
             </div>
@@ -60,6 +62,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   name: 'SingIn',
   data () {
@@ -71,9 +75,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions('auth', ['signIn']),
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
+          this.signIn(this.form)
         }
       })
     }

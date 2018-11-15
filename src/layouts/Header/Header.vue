@@ -28,11 +28,11 @@
             </div>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item>
-                <router-link :to="`/${userName}`">マイページ</router-link>
+                <router-link :to="`/users/${userName}`">マイページ</router-link>
               </el-dropdown-item>
 
               <el-dropdown-item>
-                <router-link :to="`/${userName}/items/create`">投稿する</router-link>
+                <router-link :to="`/users/${userName}/items/create`">投稿する</router-link>
               </el-dropdown-item>
 
               <el-dropdown-item>

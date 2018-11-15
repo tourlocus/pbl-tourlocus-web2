@@ -24,7 +24,7 @@ const routes = [
     ]
   },
   {
-    path: '/:params',
+    path: '/users/:params',
     component: User.Container,
     children: [
       { path: '/', name: 'MyPage', component: User.Top },
@@ -36,7 +36,8 @@ const routes = [
       { path: 'presents/create', name: 'PresentCreate', component: User.Present.Create }
     ]
   },
-  { path: '*', name: 'NotFound', component: NotFound }
+  { path: '/notfound', name: 'NotFound', component: NotFound },
+  { path: '*', redirect: 'notfound' }
 ]
 
 export default routes

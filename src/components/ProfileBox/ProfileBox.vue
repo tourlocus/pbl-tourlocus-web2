@@ -2,14 +2,15 @@
   <div class="c-profileBox">
 
     <div class="left-box">
-      <img src="https://www.pakutaso.com/shared/img/thumb/elly181027B003_TP_V.jpg" />
-      <p>hogehoge</p>
+      <!-- <img src="https://www.pakutaso.com/shared/img/thumb/elly181027B003_TP_V.jpg" /> -->
+      <img :src="`${user.icon}`" />
+      <p>{{ user.name }}</p>
     </div>
 
     <div class="right-box">
       <h3>自己紹介文</h3>
       <div class="w__intro">
-        よろしくお願いします。
+        {{ user.intro }}
       </div>
 
       <div class="actionBtn">
@@ -26,7 +27,8 @@
 
 <script>
 export default {
-  name: 'ProfileBox'
+  name: 'ProfileBox',
+  props: ['user']
 }
 </script>
 

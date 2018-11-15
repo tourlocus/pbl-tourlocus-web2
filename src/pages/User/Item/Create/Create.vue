@@ -8,11 +8,37 @@
         >
 
           <div class="w__field-tag">
-            <label>タグ</label>
-            <input-tag
-              v-model.trim="form.tags"
-              :limit="5"
-            />
+            <label>タグ
+              <span>(地域に関することを３つまで)</span>
+            </label>
+            <el-tag
+              v-for="(tag, i) in form.tags"
+              :key="i"
+              closable
+              :disable-transitions="false"
+              @close="handleClose(tag)"
+            >
+              {{ tag }}
+            </el-tag>
+            <template v-if="form.tags.length < 3">
+              <el-input
+                v-model="inputValue"
+                v-if="inputVisible"
+                ref="saveTagInput"
+                size="mini"
+                class="input-new-tag"
+                @keyup.enter.native="handleInputConfirm"
+                @blur="handleInputConfirm"
+              />
+              <el-button
+                v-else
+                size="small"
+                @click="showInput"
+                class="button-new-tag"
+              >
+                New Tag
+              </el-button>
+            </template>
           </div>
 
           <div class="w__field mt20mb20">
@@ -46,7 +72,9 @@
             </label>
             <template v-if="images.length > 0">
               <el-carousel
+                style="text-align: center;"
                 class="mt20mb20"
+                indicator-position="outside"
               >
                 <el-carousel-item
                   v-for="(image, index) in images"
@@ -89,14 +117,10 @@
 </template>
 
 <script>
-import InputTag from 'vue-input-tag'
 import {mapActions} from 'vuex'
 
 export default {
   name: 'ItemCreate',
-  components: {
-    InputTag
-  },
   data () {
     return {
       form: {
@@ -105,7 +129,9 @@ export default {
         files: [],
         content: ''
       },
-      images: []
+      images: [],
+      inputVisible: false,
+      inputValue: ''
     }
   },
   methods: {
@@ -138,6 +164,23 @@ export default {
           this.createItem(this.form)
         }
       })
+    },
+    handleClose (tag) {
+      this.form.tags.splice(this.form.tags.indexOf(tag), 1)
+    },
+    showInput () {
+      this.inputVisible = true
+      this.$nextTick(_ => {
+        this.$refs.saveTagInput.$refs.input.focus()
+      })
+    },
+    handleInputConfirm () {
+      const inputValue = this.inputValue
+      if (inputValue) {
+        this.form.tags.push(inputValue)
+      }
+      this.inputVisible = false
+      this.inputValue = ''
     }
   }
 }

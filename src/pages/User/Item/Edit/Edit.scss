@@ -1,11 +1,11 @@
 .container {
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 
 .main {
   width: 960px;
-  margin: 20px;
   padding: 32px 20px;
   background-color: #fff;
   border-radius: 3px;
@@ -55,16 +55,32 @@
   label {
     font-size: 16px;
     color: #555;
+    display: block;
+
+    span {
+      font-size: 12px;
+      position: relative;
+      bottom: 2px;
+    }
   }
+
+
+  .el-tag  {
+    margin-right: 4px;
+  }
+
+  .input-new-tag {
+    width: 90px;
+    margin-right: 10px;
+  }
+
+  .button-new-tag {
+    height: 32px;
+    vertical-align: top;
+  }
+
 }
 
-.vue-input-tag-wrapper {
-  border: 1px solid #ddd;
-  border-radius: 3px;
-  color: #555;
-  font-size: 16px;
-  padding: 8px 10px 7px;;
-}
 
 .w__field-file {
   label {
@@ -88,7 +104,7 @@
 
   img {
     height: 300px;
-    width: 100%;
+    width: auto;
   }
 }
 
@@ -115,9 +131,6 @@
 
 @media only screen and (max-width: 991px) {}
 @media only screen and (max-width: 768px) {
-  .container {
-    padding: 0 20px;
-  }
 
   .main {
     width: 100%;
@@ -126,6 +139,12 @@
   .actionBtn {
     input {
       width: 100%
+    }
+  }
+
+  .w__field-file {
+    img {
+      width: 100%;
     }
   }
 }
