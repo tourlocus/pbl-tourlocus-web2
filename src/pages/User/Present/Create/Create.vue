@@ -2,12 +2,8 @@
   <div class="p-create-present">
     <div class="container">
 
-<<<<<<< Updated upstream
-    <button v-on:click="addmain">+</button>
-=======
     <button @click="addmain" class="addmain">+</button>
     <button @click="deletemain" class="deletemain">-</button>
->>>>>>> Stashed changes
 
       <div class="main">
 
@@ -24,8 +20,6 @@
         <label class="cp_sl06_selectlabel">記事選択</label>
         </div>
 
-<<<<<<< Updated upstream
-=======
         <div class="present" v-show="form3">
 
         <div class="w__field mt20mb20">
@@ -197,7 +191,6 @@
         <img class="showimg" v-show="uploadedImage2" :src="uploadedImage2" />
       </div>
 
->>>>>>> Stashed changes
       <div class="present">
 
       <div class="w__field mt20mb20">
@@ -278,16 +271,9 @@
 
       <div class="file">
         ファイルの選択
-<<<<<<< Updated upstream
-        <input type="file" v-on:change="onFileChange">
-        </div>
-
-        <img class="showimg" v-show="uploadedImage" :src="uploadedImage" />
-=======
         <input type="file" v-on:change="onFileChange1">
       </div>
       <img class="showimg" v-show="uploadedImage1" :src="uploadedImage1" />
->>>>>>> Stashed changes
 
       <div class="actionBtn">
         <input
@@ -305,28 +291,6 @@
 <script>
 export default {
   name: 'CreatePresent',
-<<<<<<< Updated upstream
-  data () {
-    return {
-      name: '',
-      uploadedImage: ''
-    }
-  },
-  methods: {
-    onFileChange (e) {
-      let files = e.target.files || e.dataTransfer.files
-      this.createImage(files[0])
-    },
-    createImage (file) {
-      let reader = new FileReader()
-      reader.onload = e => {
-        this.uploadedImage = e.target.result
-      }
-      reader.readAsDataURL(file)
-    }
-  }
-}
-=======
   data() {
     return {
       name: "",
@@ -387,7 +351,6 @@ export default {
     }
   }
 };
->>>>>>> Stashed changes
 </script>
 
 <style lang="scss" scoped>
