@@ -104,23 +104,21 @@
         </div>
         <img class="showimg" v-show="uploadedImage3" :src="uploadedImage3" />
       </div>
-
-
         <div class="present" v-show="form2">
 
-        <div class="w__field mt20mb20">
-          <label>商品名</label>
-          <div class="input">
-            <input
-              type="text"
-              name="title"
-            />
-          </div>
-          <div
-            class="form__errors"
-            v-if="errors.has('title')"
-          >
-            商品名は必須です
+          <div class="w__field mt20mb20">
+            <label>商品名</label>
+            <div class="input">
+             <input
+               type="text"
+               name="title"
+             />
+            </div>
+            <div
+             class="form__errors"
+             v-if="errors.has('title')"
+            >
+             商品名は必須です
           </div>
         </div>
 
@@ -291,66 +289,66 @@
 <script>
 export default {
   name: 'CreatePresent',
-  data() {
+  data () {
     return {
-      name: "",
-      uploadedImage1: "",
-      uploadedImage2: "",
-      uploadedImage3: "",
+      name: '',
+      uploadedImage1: '',
+      uploadedImage2: '',
+      uploadedImage3: '',
       form2: false,
       form3: false
-    };
+    }
   },
   methods: {
-    onFileChange1(e) {
-      let files = e.target.files || e.dataTransfer.files;
-      this.createImage1(files[0]);
+    onFileChange1 (e) {
+      let files = e.target.files || e.dataTransfer.files
+      this.createImage1(files[0])
     },
-    createImage1(file) {
-      let reader = new FileReader();
+    createImage1 (file) {
+      let reader = new FileReader()
       reader.onload = e => {
-        this.uploadedImage1 = e.target.result;
-      };
-      reader.readAsDataURL(file);
+        this.uploadedImage1 = e.target.result
+      }
+      reader.readAsDataURL(file)
     },
-    onFileChange2(e) {
-      let files = e.target.files || e.dataTransfer.files;
-      this.createImage2(files[0]);
+    onFileChange2 (e) {
+      let files = e.target.files || e.dataTransfer.files
+      this.createImage2(files[0])
     },
-    createImage2(file) {
-      let reader = new FileReader();
+    createImage2 (file) {
+      let reader = new FileReader()
       reader.onload = e => {
-        this.uploadedImage2 = e.target.result;
-      };
-      reader.readAsDataURL(file);
+        this.uploadedImage2 = e.target.result
+      }
+      reader.readAsDataURL(file)
     },
-    onFileChange3(e) {
-      let files = e.target.files || e.dataTransfer.files;
-      this.createImage3(files[0]);
+    onFileChange3 (e) {
+      let files = e.target.files || e.dataTransfer.files
+      this.createImage3(files[0])
     },
-    createImage3(file) {
-      let reader = new FileReader();
+    createImage3 (file) {
+      let reader = new FileReader()
       reader.onload = e => {
-        this.uploadedImage3 = e.target.result;
-      };
-      reader.readAsDataURL(file);
+        this.uploadedImage3 = e.target.result
+      }
+      reader.readAsDataURL(file)
     },
-    addmain() {
-      if(this.form2 == false && this.form3 == false) {
-          this.form2 = true;
-      } else if(this.form2 == true && this.form3 == false) {
-          this.form3 = true;
+    addmain () {
+      if (this.form2 === false && this.form3 === false) {
+        this.form2 = true
+      } else if (this.form2 === true && this.form3 === false) {
+        this.form3 = true
       }
     },
-    deletemain() {
-      if(this.form2 == true && this.form3 == true) {
-        this.form3 = false;
-      } else if(this.form2 == true && this.form3 == false) {
-        this.form2 = false;
+    deletemain () {
+      if (this.form2 === true && this.form3 === true) {
+        this.form3 = false
+      } else if (this.form2 === true && this.form3 === false) {
+        this.form2 = false
       }
     }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

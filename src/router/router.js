@@ -34,7 +34,7 @@ const routes = [
       { path: 'items/edit/:id', name: 'ItemEdit', component: User.Item.Edit },
       { path: 'items/:id', name: 'ItemDetail', component: User.Item.Detail },
       { path: 'presents/create', name: 'PresentCreate', component: User.Present.Create },
-      { path: 'presents/edit/:id', name: 'PresentEdit', component: User.Present.Edit },
+      { path: 'presents/edit/:id', name: 'PresentEdit', component: User.Present.Edit }
     ]
   },
   { path: '*', name: 'NotFound', component: NotFound }
