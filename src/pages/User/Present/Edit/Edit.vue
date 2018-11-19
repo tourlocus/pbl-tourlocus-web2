@@ -6,7 +6,6 @@
     <button @click="deletemain" class="deletemain">-</button>
 
       <div class="main">
-
         <div class="cp_ipselect">
           <select class="cp_sl06" required>
           <option value="" hidden disabled selected></option>
