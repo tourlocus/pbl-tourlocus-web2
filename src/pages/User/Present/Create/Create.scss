@@ -285,7 +285,11 @@
   cursor: pointer;
 }
 
+<<<<<<< Updated upstream
 button {
+=======
+.addmain {
+>>>>>>> Stashed changes
   display: inline-block;
   height: 50px;
   width: 50px;
@@ -303,6 +307,27 @@ button {
   z-index: 999;
 }
 
+<<<<<<< Updated upstream
+=======
+.deletemain {
+  display: inline-block;
+  height: 50px;
+  width: 50px;
+  font-size: 40px;
+  float: right;
+  outline: none;
+  text-decoration: none;
+  border-radius: 50%;
+  color: white;
+  background-color: #ffbf7f;
+  transition: .4s;
+  position: fixed;
+  top: 150px;
+  right: 160px;
+  z-index: 999;
+}
+
+>>>>>>> Stashed changes
 .showimg{
   max-width: 700px;
   max-height: 700px;

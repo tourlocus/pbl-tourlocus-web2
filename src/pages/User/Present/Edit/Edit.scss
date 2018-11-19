@@ -286,21 +286,18 @@
   }
   
   button {
-    display: inline-block;
     height: 50px;
     width: 50px;
     font-size: 40px;
-    float: right;
+    border-radius: 100%;
     outline: none;
-    text-decoration: none;
-    border-radius: 50%;
     color: white;
     background-color: #ffbf7f;
-    transition: .4s;
+    border-color: #ffbf7f;
     position: fixed;
-    top: 100px;
-    right: 160px;
-    z-index: 999;
+    right: 2em;
+    position: 0;
+
   }
   
   .showimg{
