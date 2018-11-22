@@ -89,7 +89,7 @@
 
             <div class="file">
               ファイルの選択
-              <input type="file" v-on:change="onFileChange1">
+              <input type="file" v-on:change="onFileChange3">
             </div>
             <img class="showimg" v-show="presents[2].photo" :src="presents[2].photo" />
 
@@ -231,7 +231,10 @@
               ファイルの選択
               <input type="file" v-on:change="onFileChange1">
             </div>
-            <img class="showimg" v-show="presents[0].photo" :src="presents[0].photo" />
+
+            <div class="showimg">
+              <img class="img" v-show="presents[0].photo" :src="presents[0].photo" />
+            </div>
 
             <div class="actionBtn">
               <input
@@ -248,6 +251,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   name: 'CreatePresent',
   data () {
@@ -313,7 +318,7 @@ export default {
     createImage3 (file) {
       let reader = new FileReader()
       reader.onload = e => {
-        this.presents[0].photo = e.target.result
+        this.presents[2].photo = e.target.result
       }
       reader.readAsDataURL(file)
     },
@@ -332,7 +337,12 @@ export default {
       }
     },
     handleSubmit () {
-      console.log(JSON.stringify(this.presents) + JSON.stringify(this.article_id))
+      console.log("data" + this.presents)
+      axios({
+        method : 'POST',
+        url    : 'http://localhost:3000/presents/create',
+        data   : this.presents
+      }).then(response => console.log(response.status));
     }
   }
 }
