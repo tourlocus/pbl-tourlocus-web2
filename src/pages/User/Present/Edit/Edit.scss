@@ -227,7 +227,7 @@
   }
 
   img {
-    height: 300px;
+    height: auto;
     width: 100%;
   }
 }
@@ -257,13 +257,24 @@
 
 }
 
+.showimg {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+
+}
+
 .file{
-  display: inline-block;
+  display: block;
+  max-width: 115px;
+  width: auto;
   overflow: hidden;
   position: relative;
   padding: 0.3em 1em;
   border: 1px solid #ffbf7f;
   color: black;
+  white-space: nowrap;
+  text-align: center;
   text-decoration: none;
   transition: .4s;
   border-radius: 3px;
@@ -283,6 +294,7 @@
   margin: 0;
   font-size: 100px;
   cursor: pointer;
+  bottom: 0;
 }
 
 .addmain {
