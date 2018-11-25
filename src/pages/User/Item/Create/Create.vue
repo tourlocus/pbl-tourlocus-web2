@@ -84,13 +84,9 @@
 </template>
 
 <script>
-import InputTag from 'vue-input-tag'
 
 export default {
   name: 'ItemCreate',
-  components: {
-    InputTag
-  },
   data () {
     return {
       images: []

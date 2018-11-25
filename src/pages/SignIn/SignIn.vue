@@ -17,6 +17,7 @@
               <input
                 type="email"
                 name="email"
+                autocomplete="off"
                 v-validate="'required'"
               />
             </div>
@@ -34,6 +35,7 @@
               <input
                 type="password"
                 name="password"
+                autocomplete="off"
                 v-validate="'required'"
               />
             </div>

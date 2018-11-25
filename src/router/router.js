@@ -22,7 +22,7 @@ const routes = [
     ]
   },
   {
-    path: '/:params',
+    path: '/users/:params',
     component: User.Container,
     children: [
       { path: '/', name: 'MyPage', component: User.Top },
@@ -33,7 +33,8 @@ const routes = [
       { path: 'items/:id', name: 'ItemDetail', component: User.Item.Detail }
     ]
   },
-  { path: '*', name: 'NotFound', component: NotFound }
+  { path: '/notfound', name: 'NotFound', component: NotFound },
+  { path: '*', redirect: {name: 'NotFound'} }
 ]
 
 export default routes
