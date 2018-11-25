@@ -18,6 +18,19 @@
               </li>
             </ul>
           </div>
+
+          <div class="content">
+            <item-card
+              v-for="(article ,i) in articles"
+              :key="i"
+              :name="user.name"
+              :img="user.icon"
+              :id="article.id"
+              :updated_at="article.updated_at"
+              :title="article.title"
+              :tags="article.tags"
+            />
+          </div>
         </div>
 
       </div>
@@ -26,18 +39,28 @@
 </template>
 
 <script>
-import {ProfileBox} from '../../../components'
-import {mapState} from 'vuex'
+import {ProfileBox, ItemCard} from '../../../components'
+import {User} from '../../../api'
+import {getUser, getArticleItems} from '../../../utils'
 
 export default {
   name: 'MyPage',
-  components: {
-    ProfileBox
+  data () {
+    return {
+      user: {},
+      articles: []
+    }
   },
-  computed: {
-    ...mapState('auth', {
-      user: state => state.userInfo
-    })
+  components: {
+    ProfileBox,
+    ItemCard
+  },
+  computed: {},
+  async created () {
+    const params = this.$route.params.params
+    const result = await User.getItems(params)
+    this.user = getUser(result)
+    this.articles = getArticleItems(result)
   }
 }
 </script>

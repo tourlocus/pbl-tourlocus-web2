@@ -3,7 +3,6 @@
     <div class="container">
       <div class="main">
         <form
-          @submit.prevent="handleSubmit"
           class="w__form"
         >
 
@@ -52,7 +51,7 @@
               />
             </div>
             <div
-              class="form__errors"
+              class="form__error"
               v-if="errors.has('title')"
             >
               タイトルは必須です
@@ -104,10 +103,12 @@
           </div>
 
           <div class="actionBtn">
-            <input
-              type="submit"
-              value="投稿する"
-            />
+            <el-button
+              @click="handleSubmit"
+              :loading="isLoading"
+            >
+              投稿する
+            </el-button>
           </div>
 
         </form>
@@ -131,7 +132,8 @@ export default {
       },
       images: [],
       inputVisible: false,
-      inputValue: ''
+      inputValue: '',
+      isLoading: false
     }
   },
   methods: {
@@ -161,7 +163,7 @@ export default {
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
-          this.createItem(this.form)
+          this.isLoading = true
         }
       })
     },

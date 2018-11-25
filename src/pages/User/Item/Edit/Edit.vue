@@ -70,14 +70,14 @@
                 @change="handleChangeFile"
               />
             </label>
-            <template v-if="form.file.length > 0">
+            <template v-if="images.length > 0">
               <el-carousel
                 style="text-align: center"
                 class="mt20mb20"
                 indicator-position="outside"
               >
                 <el-carousel-item
-                  v-for="(image, index) in form.file"
+                  v-for="(image, index) in images"
                   :key="index"
                 >
                   <img :src="`${image}`" />
@@ -117,16 +117,12 @@
 </template>
 
 <script>
-import InputTag from 'vue-input-tag'
 import {Item} from '../../../../api'
 import {tagFormat, mediaFormat} from '../../../../utils/arrayFormat'
 // import cloneDeep from 'lodash/cloneDeep'
 
 export default {
   name: 'ItemEdit',
-  components: {
-    InputTag
-  },
   data () {
     return {
       form: {
@@ -135,6 +131,7 @@ export default {
         file: [],
         tags: []
       },
+      images: [],
       inputVisible: false,
       inputValue: ''
     }
@@ -146,7 +143,9 @@ export default {
 
       if (e.target.files.length !== 0) {
         const files = e.target.files
+
         this.form.file.length = 0
+        this.images.length = 0
 
         for (let i = 0; i < files.length; i++) {
           this.showImage(files[i])
@@ -154,16 +153,19 @@ export default {
       }
     },
     showImage (file) {
+      this.form.file.push(file)
       const reader = new FileReader()
       const vm = this
       reader.onload = e => {
-        vm.form.file.push(e.target.result)
+        vm.images.push(e.target.result)
       }
       reader.readAsDataURL(file)
     },
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
+          const id = this.$route.params.id
+          Item.putItem(this.form, id)
         }
       })
     },
@@ -191,6 +193,7 @@ export default {
     const {title, content, mediaFiles, tags} = await Item.getEdit(id)
     this.form.title = title
     this.form.content = content
+    this.images = mediaFormat(mediaFiles)
     this.form.file = mediaFormat(mediaFiles)
     this.form.tags = tagFormat(tags)
   }

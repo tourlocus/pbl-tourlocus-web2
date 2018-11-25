@@ -7,7 +7,6 @@
         </div>
 
         <form
-          @submit.prevent="handleSubmit"
           class="form"
         >
           <div class="w__field">
@@ -159,10 +158,16 @@
           </div>
 
           <div class="actionBtn">
-            <input
+            <!-- <input
               type="submit"
               value="登録する"
-            />
+            /> -->
+            <el-button
+              @click="handleSubmit"
+              :loading="isLoading"
+            >
+              登録する
+            </el-button>
           </div>
 
         </form>
@@ -172,7 +177,8 @@
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+// import {mapActions} from 'vuex'
+import {Auth} from '../../api'
 
 export default {
   name: 'SignUp',
@@ -185,7 +191,8 @@ export default {
         birthday: '',
         gender: ''
       },
-      confirmPassword: ''
+      confirmPassword: '',
+      isLoading: false
     }
   },
   computed: {
@@ -226,11 +233,19 @@ export default {
     }
   },
   methods: {
-    ...mapActions('auth', ['signUp']),
+    // ...mapActions('auth', ['signUp']),
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
-          this.signUp(this.form)
+          this.isLoading = true
+          Auth.signUpRequest(this.form)
+            .then(res => {
+              this.isLoading = false
+            })
+            .catch(() => {
+              this.isLoading = false
+            })
+          // this.signUp(this.form)
         }
       })
     }

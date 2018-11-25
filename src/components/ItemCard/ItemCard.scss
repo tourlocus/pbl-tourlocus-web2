@@ -1,0 +1,45 @@
+.c-itemcard {
+  padding: 12px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.card-header {
+  p {
+    margin: 0;
+    color: #555;
+    font-size: 16px;
+  }
+}
+
+.card-title {
+  display: flex;
+
+  img {
+    width: 40px;
+    height: 40px;
+  }
+
+  .item-article-title {
+    font-size: 18px;
+    color: #555;
+    margin: 0;
+    position: relative;
+    top: 6px;
+    padding: 0 8px;
+    text-decoration: none;
+  }
+}
+
+.card-tag-name {
+  position: relative;
+  left: 48px;
+
+  a {
+    color: #555;
+    font-size: 12px;
+    text-decoration: none;
+    margin-right: 8px;
+    padding: 2px 8px;
+    background: #ddd;
+  }
+}

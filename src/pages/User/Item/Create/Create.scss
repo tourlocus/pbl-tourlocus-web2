@@ -120,24 +120,36 @@
     background-color: #42b983;
     padding: 8px 0;
   }
+
+  .el-button {
+    font-size: 18px;
+    width: 320px;
+    color: #fff;
+    background: #42b983;
+  }
 }
 
 .mt20mb20 {
   margin: 32px 0;
 }
 
+.form__error {
+  color: red;
+}
+
 
 @media only screen and (max-width: 991px) {}
 @media only screen and (max-width: 768px) {
-  .main { font-size: 12px;
+  .main {
+    font-size: 12px;
     position: relative;
     bottom: 2px;
     width: 100%;
   }
 
   .actionBtn {
-    input {
-      width: 100%
+    .el-button {
+      width: 100%;
     }
   }
 
