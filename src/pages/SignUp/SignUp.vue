@@ -7,7 +7,6 @@
         </div>
 
         <form
-          @submit.prevent="handleSubmit"
           class="form"
         >
           <div class="w__field">
@@ -99,6 +98,7 @@
                 type="text"
                 name="birthday"
                 placeholder="1996-04-01"
+                maxlength="10"
                 v-validate="'required|date_format:YYYY-MM-DD'"
                 autocomplete="off"
                 v-model.trim="form.birthday"
@@ -159,10 +159,12 @@
           </div>
 
           <div class="actionBtn">
-            <input
-              type="submit"
-              value="登録する"
-            />
+            <el-button
+              :loading="isLoading"
+              @click="handleSubmit"
+            >
+              登録する
+            </el-button>
           </div>
 
         </form>
@@ -172,6 +174,8 @@
 </template>
 
 <script>
+import {User} from '../../api'
+import {mapActions} from 'vuex'
 
 export default {
   name: 'SignUp',
@@ -184,7 +188,8 @@ export default {
         birthday: '',
         gender: ''
       },
-      confirmPassword: ''
+      confirmPassword: '',
+      isLoading: false
     }
   },
   computed: {
@@ -225,10 +230,23 @@ export default {
     }
   },
   methods: {
+    ...mapActions('user', ['SignUp']),
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
-          console.log('ok')
+          this.isLoading = true
+          User.signUpRequest(this.form)
+            .then(res => {
+              setTimeout(() => {
+                this.isLoading = false
+                this.SignUp(res)
+              }, 2000)
+            })
+            .catch(() => {
+              setTimeout(() => {
+                this.isLoading = false
+              }, 2000)
+            })
         }
       })
     }

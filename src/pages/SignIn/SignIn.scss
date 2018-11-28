@@ -1,11 +1,11 @@
 .container {
   display: flex;
   justify-content: center;
+  padding: 20px;
 }
 
 .main {
   width: 648px;
-  margin: 20px;
   background-color: #fff;
   border-radius: 3px;
   box-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
@@ -59,7 +59,7 @@
   display: flex;
   justify-content: center;
 
-  input {
+  .el-button {
     width: 300px;
     height: 48px;
     outline: 0;
@@ -77,10 +77,6 @@
 
 @media only screen and (max-width: 991px) {}
 @media only screen and (max-width: 768px) {    
-  .container {
-    padding: 0 20px;
-  }
-
   .main {
     width: 100%;
   }

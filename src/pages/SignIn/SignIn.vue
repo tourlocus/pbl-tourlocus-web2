@@ -6,10 +6,7 @@
           <h3>新規登録</h3>
         </div>
 
-        <form
-          class="form"
-          @submit.prevent="handleSubmit"
-        >
+        <form class="form">
 
           <div class="w__field mt20mb20">
             <label>メールアドレス</label>
@@ -48,10 +45,12 @@
           </div>
 
           <div class="actionBtn">
-            <input
-              type="submit"
-              value="ログイン"
-            />
+            <el-button
+              :loading="isLoading"
+              @click="handleSubmit"
+            >
+              ログイン
+            </el-button>
           </div>
 
         </form>
@@ -69,7 +68,8 @@ export default {
       form: {
         email: '',
         password: ''
-      }
+      },
+      isLoading: false
     }
   },
   methods: {
