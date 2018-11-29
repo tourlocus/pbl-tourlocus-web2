@@ -7,6 +7,11 @@
           <router-link to="/">性別</router-link>
           <router-link to="/">年代別</router-link>
         </div>
+
+      <div class="articlebox">
+        <p>ここがユーザーの記事が表示されるbox</p>
+
+      </div>
       </div>
     </div>
   </div>

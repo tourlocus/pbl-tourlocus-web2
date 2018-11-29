@@ -12,3 +12,31 @@
   border-radius: 3px;
   box-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
 }
+.articlebox{
+  margin:2em 0;
+  position: relative;
+  padding: 0.25em 1em;
+  border: solid 2px #ffcb8a;
+  border-radius: 3px 0 3px 0;
+}
+.articlebox:before,.articlebox:after
+{
+  content: '';
+  position: absolute;
+  width:10px;
+  height: 10px;
+  border: solid 2px #ffcb8a;
+  border-radius: 50%;
+}
+.articlebox:after {
+  top:-12px;
+  left:-12px;
+}
+.articlebox:before {
+  bottom:-12px;
+  right:-12px;
+}
+.articlebox p {
+  margin: 0; 
+  padding: 0;
+}
