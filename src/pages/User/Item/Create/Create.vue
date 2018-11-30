@@ -9,7 +9,6 @@
 
           <div class="w__field-tag">
             <label>タグ</label>
-            <input-tag :limit="5" />
           </div>
 
           <div class="w__field mt20mb20">
@@ -84,6 +83,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 
 export default {
   name: 'ItemCreate',
@@ -91,6 +91,11 @@ export default {
     return {
       images: []
     }
+  },
+  computed: {
+    ...mapState('user', {
+      cred: state => state
+    })
   },
   methods: {
     handleChangeFile (e) {
