@@ -3,8 +3,8 @@ import * as types from './mutation-type'
 
 export default {
 
-  // 新規登録
-  SignUp ({commit}, values) {
+  // 新規登録・ログイン
+  Login ({commit}, values) {
     const responseHeader = values.headers
     const responseData = values.data
 
@@ -16,7 +16,7 @@ export default {
       isAuth: true
     }
 
-    commit(types.SIGN_UP, payloadValue)
+    commit(types.LOGIN, payloadValue)
     router.push(`/users/${payloadValue.name}`)
   }
 }

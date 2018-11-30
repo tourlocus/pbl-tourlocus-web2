@@ -1,2 +1,1 @@
-export {SearchForm} from './SearchForm'
-export {ProfileBox} from './ProfileBox'
+export {UserProfile} from './UserProfile'

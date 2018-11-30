@@ -15,7 +15,8 @@
                 type="email"
                 name="email"
                 autocomplete="off"
-                v-validate="'required'"
+                v-model.trim="form.email"
+                v-validate="{required: true}"
               />
             </div>
             <div
@@ -33,6 +34,7 @@
                 type="password"
                 name="password"
                 autocomplete="off"
+                v-model.trim="form.password"
                 v-validate="'required'"
               />
             </div>
@@ -61,6 +63,9 @@
 </template>
 
 <script>
+import {User} from '../../api'
+import {mapActions} from 'vuex'
+
 export default {
   name: 'SingIn',
   data () {
@@ -73,9 +78,23 @@ export default {
     }
   },
   methods: {
+    ...mapActions('user', ['Login']),
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
+          this.isLoading = true
+          User.SignInRequest(this.form)
+            .then(res => {
+              setTimeout(() => {
+                this.isLoading = false
+                this.Login(res)
+              }, 2000)
+            })
+            .catch(() => {
+              setTimeout(() => {
+                this.isLoading = false
+              }, 2000)
+            })
         }
       })
     }

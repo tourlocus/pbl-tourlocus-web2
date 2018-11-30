@@ -1,3 +1,4 @@
+import getters from './getter'
 import mutations from './mutation'
 import actions from './action'
 
@@ -10,6 +11,7 @@ export default {
     client: null,
     isAuth: false
   },
+  getters,
   mutations,
   actions
 }

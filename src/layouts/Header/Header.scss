@@ -9,6 +9,9 @@
 }
 
 .title {
+  display: flex;
+  margin-right: auto;
+
   a {
     font-size: 23px;
     color: #fff;
@@ -17,6 +20,39 @@
   }
 }
 
+.nav {
+  display: flex;
+}
+
+.navb {
+  padding-top: 8px;
+
+  a {
+    font-size: 16px;
+    color: #fff;
+    text-decoration: none;
+
+    &:first-child {
+      margin-right: 16px;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+.menu {
+  span {
+    display: block;
+    font-size: 26px;
+    color: #fff;
+  }
+}
+
+.tablet-only {
+  display: none;
+}
 
 @media only screen and (max-width: 991px) {}
 @media only screen and (max-width: 768px) {
@@ -25,5 +61,14 @@
   }
   .tablet-only {
     display: block;
+  }
+
+  .search {
+    .el-input {
+      width: 80px;
+    }
+    /deep/ .el-input__inner {
+      border-radius: 50px;
+    }
   }
 }

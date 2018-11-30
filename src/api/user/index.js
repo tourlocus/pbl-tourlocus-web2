@@ -1,5 +1,8 @@
-import {signUpRequest} from './post'
+import {getItems} from './get'
+import {signUpRequest, SignInRequest} from './post'
 
 export const User = {
-  signUpRequest
+  getItems,
+  signUpRequest,
+  SignInRequest
 }

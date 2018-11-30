@@ -2,7 +2,6 @@
   <div class="p-favorite">
     <div class="container">
       <div class="main">
-        <profile-box />
 
         <div class="section-main">
           <div class="tab">
@@ -26,13 +25,9 @@
 </template>
 
 <script>
-import {ProfileBox} from '../../../components'
 
 export default {
-  name: 'MyPage',
-  components: {
-    ProfileBox
-  }
+  name: 'MyPage'
 }
 </script>
 

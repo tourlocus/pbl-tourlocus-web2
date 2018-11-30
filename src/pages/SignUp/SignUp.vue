@@ -230,7 +230,7 @@ export default {
     }
   },
   methods: {
-    ...mapActions('user', ['SignUp']),
+    ...mapActions('user', ['Login']),
     handleSubmit () {
       this.$validator.validateAll().then(result => {
         if (result) {
@@ -239,7 +239,7 @@ export default {
             .then(res => {
               setTimeout(() => {
                 this.isLoading = false
-                this.SignUp(res)
+                this.Login(res)
               }, 2000)
             })
             .catch(() => {

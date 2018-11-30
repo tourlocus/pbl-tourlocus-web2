@@ -1,25 +1,26 @@
 <template>
   <div id="app">
-    <common-header @openSearch="open =!open" />
-    <search-form v-if="open" />
-    <router-view/>
+    <common-header
+      :isAuth="user.isAuth"
+      :name="user.name"
+    />
+    <router-view />
   </div>
 </template>
 
 <script>
 import {Header as CommonHeader} from './layouts'
-import {SearchForm} from './components'
+import {mapState} from 'vuex'
 
 export default {
   name: 'App',
   components: {
-    CommonHeader,
-    SearchForm
+    CommonHeader
   },
-  data () {
-    return {
-      open: false
-    }
+  computed: {
+    ...mapState('user', {
+      user: state => state
+    })
   }
 }
 </script>
