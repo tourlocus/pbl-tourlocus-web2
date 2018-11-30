@@ -20,7 +20,7 @@
   }
 
     input {
-      width: 10%;
+      width: 100px;
       height: 25px;
       color: #555;
       font-size: 16px;
@@ -75,7 +75,7 @@
 	font-family: inherit;
 	background-color: transparent;
 	width: 100%;
-	padding: 10px 10px 10px 0;
+  padding: 10px 10px 10px 0;
 	font-size: 18px;
 	border-radius: 0;
 	border: none;
@@ -117,7 +117,7 @@
 }
 .cp_sl06:focus ~ .cp_sl06_selectlabel, .cp_sl06:valid ~ .cp_sl06_selectlabel {
 	color: #da3c41;
-	top: -20px;
+	top: -10px;
 	transition: 0.2s ease all;
 	font-size: 14px;
 }
@@ -227,22 +227,27 @@
   }
 
   img {
-    height: 300px;
+    height: auto;
     width: 100%;
   }
 }
 
 .actionBtn {
-  display: flex;
+  display: inline-block;
   justify-content: center;
-
+  bottom: 5%;
+  width: 100%;
+  max-width: 250px;
+  position: fixed;
+  text-align: center;
   input {
     outline: 0;
     border: 1px solid #ddd;
     border-radius: 3px;
     font-size: 18px;
+    width: 100%;
+    max-width: 250px;
     color: #fff;
-    width: 320px;
     background-color: #42b983;
     padding: 8px 0;
   }
@@ -257,13 +262,25 @@
 
 }
 
+.showimg {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+
+}
+
 .file{
-  display: inline-block;
+  margin: 20px 0 0 0;
+  display: block;
+  max-width: 115px;
+  width: auto;
   overflow: hidden;
   position: relative;
   padding: 0.3em 1em;
   border: 1px solid #ffbf7f;
   color: black;
+  white-space: nowrap;
+  text-align: center;
   text-decoration: none;
   transition: .4s;
   border-radius: 3px;
@@ -283,15 +300,7 @@
   margin: 0;
   font-size: 100px;
   cursor: pointer;
-}
-
-.showimg{
-  text-align: center;
-}
-
-.img{
-  max-width: 700px;
-  max-height: 700px;
+  bottom: 0;
 }
 
 .addmain {
@@ -331,6 +340,11 @@
   z-index: 999;
 }
 
+.showimg{
+  max-width: 700px;
+  max-height: 700px;
+}
+
 @media only screen and (max-width: 991px) {}
 @media only screen and (max-width: 768px) {
   .container {
@@ -351,4 +365,22 @@
     right: 50px;
     z-index: 999;
   }
+}
+
+.article{
+  max-width: 70%;
+  text-align: left;
+  font-size: 20px;
+  border-bottom: solid 0.1px #ddd;
+}
+
+.kurukuru:active {
+  width: 30px;
+  margin: 100px auto 0;
+  border: 3px solid #000;
+  animation: spin 1.5s linear infinite;
+}
+@keyframes spin {
+  0% {transform: rotate(0deg);}
+  100% {transform: rotate(360deg);}
 }

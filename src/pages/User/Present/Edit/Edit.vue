@@ -13,7 +13,19 @@
         <div class="article">
           <p>{{this.article_name}}</p>
         </div>
-
+          
+          <div class="cp_ipselect">
+          <select class="cp_sl06" required v-model="article_id">
+            <option value="" hidden disabled selected></option>
+            <option value="item1">item1</option>
+            <option value="item2">item2</option>
+            <option value="item3">item3</option>
+            <option value="item4">item4</option>
+          </select>
+          <span class="cp_sl06_highlight"></span>
+          <span class="cp_sl06_selectbar"></span>
+        <label class="cp_sl06_selectlabel">記事選択</label>
+        </div>
         <div class="present" v-if="form3">
 
           <img class="showimg" v-show="presents[2].photo" :src="presents[2].photo" />
@@ -23,14 +35,14 @@
           </div>
 
           <div class="cp_ipselect">
-            <select class="cp_sl06" required v-model="presents[2].required">
+            <select class="cp_sl06" omiyage v-model="presents[2].omiyage">
               <option value="" hidden disabled selected></option>
-              <option value="両親">洋菓子</option>
-              <option value="友達">和菓子</option>
-              <option value="上司">キーホルダー</option>
-              <option value="上司">人形</option>
-              <option value="上司">飲料</option>
-              <option value="親戚">その他</option>
+              <option value="洋菓子">洋菓子</option>
+              <option value="和菓子">和菓子</option>
+              <option value="キーホルダー">キーホルダー</option>
+              <option value="人形">人形</option>
+              <option value="飲料">飲料</option>
+              <option value="その他">その他</option>
             </select>
             <span class="cp_sl06_highlight"></span>
             <span class="cp_sl06_selectbar"></span>
@@ -59,19 +71,19 @@
                 name="present_amount3"
                 required
                 v-model.trim="presents[2].present_amount"
-              />
+              />人
             </div>
           </div>
 
           <div class="price">
-            <label>価格</label>
+            <label>単価</label>
             <div class="input">
               <input
                 type="text"
                 name="present_price3"
                 required
                 v-model.trim="presents[2].present_price"
-              />
+              />円
             </div>
           </div>
 
@@ -97,14 +109,14 @@
           </div>
 
           <div class="cp_ipselect">
-            <select class="cp_sl06" required v-model="presents[1].required">
+            <select class="cp_sl06" omiyage v-model="presents[1].omiyage">
               <option value="" hidden disabled selected></option>
-              <option value="両親">洋菓子</option>
-              <option value="友達">和菓子</option>
-              <option value="上司">キーホルダー</option>
-              <option value="上司">人形</option>
-              <option value="上司">飲料</option>
-              <option value="親戚">その他</option>
+              <option value="洋菓子">洋菓子</option>
+              <option value="和菓子">和菓子</option>
+              <option value="キーホルダー">キーホルダー</option>
+              <option value="人形">人形</option>
+              <option value="飲料">飲料</option>
+              <option value="その他">その他</option>
             </select>
             <span class="cp_sl06_highlight"></span>
             <span class="cp_sl06_selectbar"></span>
@@ -132,19 +144,19 @@
                 name="present_amount2"
                 required
                 v-model.trim="presents[1].present_amount"
-              />
+              />人
             </div>
           </div>
 
           <div class="price">
-            <label>価格</label>
+            <label>単価</label>
             <div class="input">
               <input
                 type="text"
                 name="present_price2"
                 required
                 v-model.trim="presents[1].present_price"
-              />
+              />円
             </div>
           </div>
 
@@ -170,14 +182,14 @@
           </div>
 
           <div class="cp_ipselect">
-            <select class="cp_sl06" required v-model="presents[0].required">
+            <select class="cp_sl06" omiyage v-model="presents[0].omiyage">
               <option value="" hidden disabled selected></option>
-              <option value="両親">洋菓子</option>
-              <option value="友達">和菓子</option>
-              <option value="上司">キーホルダー</option>
-              <option value="上司">人形</option>
-              <option value="上司">飲料</option>
-              <option value="親戚">その他</option>
+              <option value="洋菓子">洋菓子</option>
+              <option value="和菓子">和菓子</option>
+              <option value="キーホルダー">キーホルダー</option>
+              <option value="人形">人形</option>
+              <option value="飲料">飲料</option>
+              <option value="その他">その他</option>
             </select>
             <span class="cp_sl06_highlight"></span>
             <span class="cp_sl06_selectbar"></span>
@@ -205,8 +217,7 @@
                 name="present_amount"
                 required
                 v-model.trim="presents[0].present_amount"
-              />
-              人
+              />人
             </div>
           </div>
 
@@ -234,12 +245,13 @@
           </div>
 
           <div class="actionBtn">
-            <input
-              type="submit"
-              value="投稿する"
-            />
+            
+              <input
+                type="submit"
+                value="投稿する"
+              />
+         
           </div>
-
         </div>
         </form>
       </div>
