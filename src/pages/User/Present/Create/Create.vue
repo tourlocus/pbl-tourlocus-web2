@@ -237,8 +237,10 @@
             </div>
 
             <div class="actionBtn">
-              <div class="load">
-              </div>
+              <div class="loading">
+<i><i><i><i><i><i><i><i><i><i><i><i>
+</i></i></i></i></i></i></i></i></i></i></i></i>
+</div>
               <input
                 type="submit"
                 value="投稿する"

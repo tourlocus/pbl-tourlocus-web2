@@ -352,43 +352,50 @@
     z-index: 999;
   }
 }
-.load {
-  width: 30px;
-  height: 30px;
-  position: relative;
-	background: transparent;
-	border-bottom: 2px ridge #1aa;
-	border-radius: 260px;
-      -webkit-animation: spin 1.5s linear infinite;
-      -moz-animation: spin 1.5s linear infinite;
-      -ms-animation: spin 1.5s linear infinite;
-      -o-animation: spin 1.5s linear infinite;
-      animation: spin 1.5s linear infinite;
+
+.loading {
+  font-size:48px;
+  position:relative;
+  height:1em;
+  width:1em;
+  padding-left:0.45em;
+  overflow:hidden;
+  margin:0 auto;
+    -webkit-animation:loader-rotate 0.5s steps(12) infinite;
+    -moz-animation:loader-rotate 0.5s steps(12) infinite;
+    -ms-animation:loader-rotate 0.5s steps(12) infinite;
+    -o-animation:loader-rotate 0.5s steps(12) infinite;
+    animation:loader-rotate 0.5s steps(12) infinite;
   }
   
-  @-webkit-keyframes spin {
-    0% {
-      -webkit-transform: rotate(0deg);
-    }
-    100% {
-      -webkit-transform: rotate(360deg);
-    }
+  .loading i {
+  display:block;
+  position:absolute;
+  height:0.3em;
+  width:0.1em;
+  border-radius:0.05em;
+  background:rgba(0,0,0,0.8);
+  transform:rotate(-30deg);
+  transform-origin:center 0.5em;
   }
-  @-moz-keyframes spin {
-    0% {
-      -moz-transform: rotate(0deg);
-    }
-    100% {-moz-transform: rotate(360deg);}
+  
+  @-webkit-keyframes loader-rotate {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
   }
-  @-ms-keyframes spin {
-    0% {-ms-transform: rotate(0deg);}
-    100% {-ms-transform: rotate(360deg);}
+  @-moz-keyframes loader-rotate {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
   }
-  @-o-keyframes spin {
-    0% {-o-transform: rotate(0deg);}
-    100% {-o-transform: rotate(360deg);}
+  @-ms-keyframes loader-rotate {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
   }
-  @keyframes spin {
-    0% {transform: rotate(0deg);}
-    100% {transform: rotate(360deg);}
+  @-o-keyframes loader-rotate {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
+  }
+  @keyframes loader-rotate {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(360deg);}
   }
