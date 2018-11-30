@@ -237,6 +237,8 @@
             </div>
 
             <div class="actionBtn">
+              <div class="load">
+              </div>
               <input
                 type="submit"
                 value="投稿する"
