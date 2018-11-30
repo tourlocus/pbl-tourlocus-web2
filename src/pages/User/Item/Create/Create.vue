@@ -2,10 +2,7 @@
   <div class="p-itemCreate">
     <div class="container">
       <div class="main">
-        <form
-          @submit.prevent="handleSubmit"
-          class="w__form"
-        >
+        <form class="w__form">
 
           <div class="w__field-tag">
             <label>タグ</label>
