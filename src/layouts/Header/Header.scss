@@ -24,6 +24,35 @@
   display: flex;
 }
 
+.nava {
+  display: flex;
+
+  .w-icon__group {
+    span {
+      margin: 0 16px;
+      font-size: 26px;
+      color: #fff;
+      display: block;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:last-child {
+        margin-right: 20px;
+      }
+    }
+
+    .btn-group {
+      margin-right: 32px;
+    }
+
+    .icon-group {
+      display: flex;
+    }
+  }
+}
+
 .navb {
   padding-top: 8px;
 

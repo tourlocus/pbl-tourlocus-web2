@@ -121,20 +121,22 @@
 }
 
 .actionBtn {
-  display: flex;
-  justify-content: center;
+  .el-input {
+    display: flex;
+    justify-content:center;
 
-  .el-button {
-    width: 300px;
-    height: 48px;
-    outline: 0;
-    color: #555;
-    font-size: 18px;
-    text-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    background-color: #ffbf7f;
-    color: #fff;
+    /deep/ .el-input__inner {
+      width: 300px;
+      height: 48px;
+      outline: 0;
+      color: #555;
+      font-size: 18px;
+      text-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
+      border: 1px solid #ddd;
+      border-radius: 3px;
+      background-color: #ffbf7f;
+      color: #fff;
+    }
   }
 }
 

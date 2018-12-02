@@ -17,6 +17,6 @@ export default {
     }
 
     commit(types.LOGIN, payloadValue)
-    router.push(`/users/${payloadValue.name}`)
+    router.push(`/users/${responseData.data.name}`)
   }
 }

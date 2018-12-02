@@ -6,7 +6,10 @@
           <h3>新規登録</h3>
         </div>
 
-        <form class="form">
+        <form
+          class="form"
+          @submit.prevent="handleSubmit"
+        >
 
           <div class="w__field mt20mb20">
             <label>メールアドレス</label>
@@ -47,12 +50,11 @@
           </div>
 
           <div class="actionBtn">
-            <el-button
-              :loading="isLoading"
-              @click="handleSubmit"
-            >
-              ログイン
-            </el-button>
+            <el-input
+              type="submit"
+              value="ログイン"
+              v-loading="isLoading"
+            />
           </div>
 
         </form>
@@ -79,21 +81,21 @@ export default {
   },
   methods: {
     ...mapActions('user', ['Login']),
+    updateIsLoading (v) {
+      this.isLoading = v
+    },
     handleSubmit () {
-      this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then(async result => {
         if (result) {
-          this.isLoading = true
-          User.SignInRequest(this.form)
+          this.updateIsLoading(true)
+          await User.SignInRequest(this.form)
             .then(res => {
-              setTimeout(() => {
-                this.isLoading = false
-                this.Login(res)
-              }, 2000)
+              this.updateIsLoading(false)
+              this.Login(res)
             })
             .catch(() => {
-              setTimeout(() => {
-                this.isLoading = false
-              }, 2000)
+              this.$message('ログインに失敗しました')
+              this.updateIsLoading(false)
             })
         }
       })

@@ -31,7 +31,6 @@ export const SignInRequest = async values => {
     })
 
     if (response.status === 200) {
-      return response
     }
   } catch (error) {
     throw new Error(error)

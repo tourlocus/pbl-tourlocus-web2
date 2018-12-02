@@ -4,7 +4,18 @@
 
       <!-- title -->
       <div class="title">
-        <router-link to="/">Tour Locus</router-link>
+        <div class="pc-only">
+          <router-link to="/">Tour Locus</router-link>
+        </div>
+        <div class="tablet-only">
+          <router-link to="/">
+            <img
+              src="../../assets/logo.png"
+              width="40px"
+              height="40px"
+            />
+          </router-link>
+        </div>
 
         <div class="pc-only">
           <div class="search">
@@ -12,18 +23,52 @@
           </div>
         </div>
 
-        <div class="tablet-only">
-          <div class="search">
-            <el-input
-              prefix-icon="el-icon-search"
-            />
-          </div>
-        </div>
-
       </div>
 
       <!-- ログイン後 -->
       <template v-if="isAuth">
+        <div class="nava">
+
+          <div class="w-icon__group">
+            <div class="pc-only">
+              <div class="btn-group">
+                <el-button icon="el-icon-edit" @click="toItemCreate">記事を書く</el-button>
+                <el-button icon="el-icon-plus">お土産</el-button>
+              </div>
+            </div>
+
+            <!-- tablet, mobile  -->
+            <div class="tablet-only">
+              <div class="icon-group">
+                <span @click="toItemCreate">
+                  <i class="fas fa-edit" />
+                </span>
+
+                <span>
+                  <i class="fas fa-plus" />
+                </span>
+
+                <span>
+                  <i class="fas fa-search" />
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="menu">
+            <el-dropdown trigger="click">
+              <span>
+                <i class="fas fa-ellipsis-v" />
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>
+                  <router-link :to="`/users/${name}`">マイページ</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>ログアウト</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
+        </div>
       </template>
 
       <!-- ログイン前 -->
@@ -46,6 +91,7 @@
                 </span>
                 <el-dropdown-menu slot="dropdown">
                   <el-dropdown-item>新規登録</el-dropdown-item>
+                  <el-dropdown-item>ログイン</el-dropdown-item>
                 </el-dropdown-menu>
               </el-dropdown>
             </div>
@@ -64,7 +110,15 @@ export default {
   name: 'Header',
   props: ['isAuth', 'name'],
   components: {},
-  computed: {}
+  computed: {},
+  methods: {
+    toItemCreate () {
+      this.$router.push(`/users/${this.name}/items/create`)
+    },
+    toMyPage () {
+      this.$router.push(`/users/${this.name}`)
+    }
+  }
 }
 </script>
 
