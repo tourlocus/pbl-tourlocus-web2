@@ -13,7 +13,7 @@
         <div class="article">
           <p>{{this.article_name}}</p>
         </div>
-          
+
           <div class="cp_ipselect">
           <select class="cp_sl06" required v-model="article_id">
             <option value="" hidden disabled selected></option>
@@ -28,7 +28,7 @@
         </div>
         <div class="present" v-if="form3">
 
-          <img class="showimg" v-show="presents[2].photo" :src="presents[2].photo" />
+          <img class="showimg" v-show="image3" :src="image3" />
           <div class="file">
             写真の選択
             <input type="file" v-on:change="onFileChange3">
@@ -245,12 +245,12 @@
           </div>
 
           <div class="actionBtn">
-            
+
               <input
                 type="submit"
                 value="投稿する"
               />
-         
+
           </div>
         </div>
         </form>
@@ -260,73 +260,84 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  name: 'CreatePresent',
+  name: 'EditPresent',
   data () {
     return {
       article_name: '記事a',
-      article_id: '1',
+      article_id: 'item1',
       presents: [
         {
-          present_name: '',
-          present_amount: '',
-          present_price: '',
-          required: '',
-          impression: '',
-          photo: ''
+          present_name: 'name1',
+          present_amount: 'amount1',
+          present_price: 'price1',
+          required: '両親',
+          impression: 'impression1',
+          photo: null
         },
         {
-          present_name: '',
-          present_amount: '',
-          present_price: '',
-          required: '',
-          impression: '',
-          photo: ''
+          present_name: 'name2',
+          present_amount: 'amount2',
+          present_price: 'price2',
+          required: '友達',
+          impression: 'impression2',
+          photo: null
         },
         {
-          present_name: '',
-          present_amount: '',
-          present_price: '',
-          required: '',
-          impression: '',
-          photo: ''
-        },
+          present_name: 'name3',
+          present_amount: 'amount3',
+          present_price: 'price3',
+          required: '親戚',
+          impression: 'impression3',
+          photo: null
+        }
       ],
       form2: false,
-      form3: false
+      form3: false,
+      image1: "",
+      image2: "",
+      image3: ""
     }
   },
   methods: {
-    onFileChange1 (e) {
-      let files = e.target.files || e.dataTransfer.files
+    onFileChange1: function(e) {
+      e.preventDefault();
+      let files = e.target.files;
+      this.presents[0].photo = files[0];
       this.createImage1(files[0])
     },
     createImage1 (file) {
       let reader = new FileReader()
       reader.onload = e => {
-        this.presents[0].photo = e.target.result
+        this.image1 = e.target.result
       }
       reader.readAsDataURL(file)
     },
-    onFileChange2 (e) {
-      let files = e.target.files || e.dataTransfer.files
+    onFileChange2: function(e) {
+      e.preventDefault();
+      let files = e.target.files;
+      this.presents[1].photo = files[0];
       this.createImage2(files[0])
     },
     createImage2 (file) {
       let reader = new FileReader()
       reader.onload = e => {
-        this.presents[1].photo = e.target.result
+        this.image2 = e.target.result
       }
       reader.readAsDataURL(file)
     },
-    onFileChange3 (e) {
-      let files = e.target.files || e.dataTransfer.files
+    onFileChange3: function(e) {
+      e.preventDefault();
+      let files = e.target.files;
+      this.presents[2].photo = files[0];
       this.createImage3(files[0])
     },
     createImage3 (file) {
       let reader = new FileReader()
       reader.onload = e => {
-        this.presents[2].photo = e.target.result
+        this.image3 = e.target.result
       }
       reader.readAsDataURL(file)
     },
@@ -345,16 +356,56 @@ export default {
       }
     },
     handleSubmit () {
-      console.log(JSON.stringify(this.presents) + JSON.stringify(this.article_id))
-    },
-    actionBtn () {
-      this.$http.post('http://localhost:3000/presents/update', this.presents, function (data, status, request) {
-        console.log('post suscess!')
-        console.log(status)
-      }).errer(function (data, status, request) {
-        console.log('post failed')
-      })
+      const form = new FormData()
+      form.append('photo1', this.presents[0].photo)
+      form.append('photo2', this.presents[1].photo)
+      form.append('photo3', this.presents[2].photo)
+
+      axios.post('http://localhost:3000/presents/create', {
+        presents: [
+          {
+            present_name: this.presents[0].present_name,
+            present_amount: this.presents[0].present_amount,
+            present_price: this.presents[0].present_price,
+            required: this.presents[0].required,
+            impression: this.presents[0].impression,
+          },
+          {
+            present_name: this.presents[1].present_name,
+            present_amount: this.presents[1].present_amount,
+            present_price: this.presents[1].present_price,
+            required: this.presents[1].required,
+            impression: this.presents[1].impression,
+          },
+          {
+            present_name: this.presents[2].present_name,
+            present_amount: this.presents[2].present_amount,
+            present_price: this.presents[2].present_price,
+            required: this.presents[2].required,
+            impression: this.presents[2].impression,
+          }
+        ],
+        article_id: this.article_id,
+      }
+    )
     }
+  },
+  created: function() {
+    axios.get('http://localhost:3000/presents/edit/2')
+    .then((res) => {
+      for (var i = 0; i<3; i++){
+        if (res.data.presents[i]){
+          if (i == 1) this.form2 = true
+          if (i == 2) this.form3 = true
+          this.presents[i].present_name = res.data.presents[i].present_name
+          this.presents[i].present_amount = res.data.presents[i].present_amount
+          this.presents[i].present_price = res.data.presents[i].present_price
+          this.presents[i].required = res.data.presents[i].required
+          this.presents[i].impression = res.data.presents[i].impression
+          this.presents[i].photo = res.data.presents[i].photo
+        }
+      }
+    })
   }
 }
 </script>
