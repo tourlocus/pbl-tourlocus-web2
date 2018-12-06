@@ -6,7 +6,9 @@
     <button @click="deletemain" class="deletemain">-</button>
 
       <div class="main">
+
         <form
+          @submit.prevent="handleSubmit"
           class="w__form"
         >
 
@@ -15,12 +17,12 @@
         </div>
 
           <div class="cp_ipselect">
-          <select class="cp_sl06" required v-model="article_id">
+          <select class="cp_sl06" v-model="article_id">
             <option value="" hidden disabled selected></option>
-            <option value="item1">item1</option>
-            <option value="item2">item2</option>
-            <option value="item3">item3</option>
-            <option value="item4">item4</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
           </select>
           <span class="cp_sl06_highlight"></span>
           <span class="cp_sl06_selectbar"></span>
@@ -35,7 +37,7 @@
           </div>
 
           <div class="cp_ipselect">
-            <select class="cp_sl06" omiyage v-model="presents[2].omiyage">
+            <select class="cp_sl06" omiyage v-model="presents[2].present_type">
               <option value="" hidden disabled selected></option>
               <option value="洋菓子">洋菓子</option>
               <option value="和菓子">和菓子</option>
@@ -108,7 +110,7 @@
           </div>
 
           <div class="cp_ipselect">
-            <select class="cp_sl06" omiyage v-model="presents[1].omiyage">
+            <select class="cp_sl06" omiyage v-model="presents[1].present_type">
               <option value="" hidden disabled selected></option>
               <option value="洋菓子">洋菓子</option>
               <option value="和菓子">和菓子</option>
@@ -181,7 +183,7 @@
           </div>
 
           <div class="cp_ipselect">
-            <select class="cp_sl06" omiyage v-model="presents[0].omiyage">
+            <select class="cp_sl06" omiyage v-model="presents[0].present_type">
               <option value="" hidden disabled selected></option>
               <option value="洋菓子">洋菓子</option>
               <option value="和菓子">和菓子</option>
@@ -266,10 +268,10 @@ export default {
     return {
       isLoading: false,
       article_name: '記事a',
-      article_id: 'item1',
+      article_id: '10',
       presents: [
         {
-          present_name: 'name1',
+          present_name: '洋菓子',
           present_amount: 'amount1',
           present_price: 'price1',
           required: '両親',
@@ -277,7 +279,7 @@ export default {
           photo: null
         },
         {
-          present_name: 'name2',
+          present_name: '洋菓子',
           present_amount: 'amount2',
           present_price: 'price2',
           required: '友達',
@@ -285,7 +287,7 @@ export default {
           photo: null
         },
         {
-          present_name: 'name3',
+          present_name: '洋菓子',
           present_amount: 'amount3',
           present_price: 'price3',
           required: '親戚',
@@ -359,9 +361,12 @@ export default {
     },
     handleSubmit () {
       const form = new FormData()
+      form.append('article_id', this.article_id)
       form.append('photo1', this.presents[0].photo)
       form.append('photo2', this.presents[1].photo)
       form.append('photo3', this.presents[2].photo)
+
+      var status
 
       axios.post('http://localhost:3000/presents/create', {
         presents: [
@@ -370,6 +375,8 @@ export default {
             present_amount: this.presents[0].present_amount,
             present_price: this.presents[0].present_price,
             required: this.presents[0].required,
+            impression: this.presents[0].impression,
+            image: "image1"
             impression: this.presents[0].impression
           },
           {
@@ -377,6 +384,8 @@ export default {
             present_amount: this.presents[1].present_amount,
             present_price: this.presents[1].present_price,
             required: this.presents[1].required,
+            impression: this.presents[1].impression,
+            image: "image2"
             impression: this.presents[1].impression
           },
           {
@@ -384,11 +393,19 @@ export default {
             present_amount: this.presents[2].present_amount,
             present_price: this.presents[2].present_price,
             required: this.presents[2].required,
+            impression: this.presents[2].impression,
+            image: "image3"
             impression: this.presents[2].impression
           }
         ],
         article_id: this.article_id
       }
+    ).then(response => {
+      axios.post('http://localhost:3000/presents/create_image', form)
+    }).catch(err => {
+      console.log('err:', err);
+    });
+    }
       )
       this.$validator.validateAll().then(async result => {
         if (result) {
