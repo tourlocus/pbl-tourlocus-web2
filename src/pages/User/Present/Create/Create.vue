@@ -62,7 +62,6 @@
           <label class="cp_sl06_selectlabel">送る相手</label>
           </div>
 
-
           <div class="amount">
             <label>人数</label>
             <div class="input">
@@ -244,13 +243,12 @@
             </div>
           </div>
 
-          <div class="actionBtn">
-
-              <input
-                type="submit"
-                value="投稿する"
-              />
-
+          <div class="w-actionBtn">
+            <el-input
+              type="submit"
+              value="投稿する"
+              v-loading="isLoading"
+            />
           </div>
         </div>
         </form>
@@ -259,14 +257,14 @@
   </div>
 </template>
 
-
 <script>
-import axios from 'axios'
 
+import axios from 'axios'
 export default {
   name: 'CreatePresent',
   data () {
     return {
+      isLoading: false,
       article_name: '記事a',
       article_id: 'item1',
       presents: [
@@ -297,16 +295,19 @@ export default {
       ],
       form2: false,
       form3: false,
-      image1: "",
-      image2: "",
-      image3: ""
+      image1: '',
+      image2: '',
+      image3: ''
     }
   },
   methods: {
-    onFileChange1: function(e) {
-      e.preventDefault();
-      let files = e.target.files;
-      this.presents[0].photo = files[0];
+    updateIsLoading (v) {
+      this.isLoading = v
+    },
+    onFileChange1: function (e) {
+      e.preventDefault()
+      let files = e.target.files
+      this.presents[0].photo = files[0]
       this.createImage1(files[0])
     },
     createImage1 (file) {
@@ -316,10 +317,10 @@ export default {
       }
       reader.readAsDataURL(file)
     },
-    onFileChange2: function(e) {
-      e.preventDefault();
-      let files = e.target.files;
-      this.presents[1].photo = files[0];
+    onFileChange2: function (e) {
+      e.preventDefault()
+      let files = e.target.files
+      this.presents[1].photo = files[0]
       this.createImage2(files[0])
     },
     createImage2 (file) {
@@ -329,10 +330,10 @@ export default {
       }
       reader.readAsDataURL(file)
     },
-    onFileChange3: function(e) {
-      e.preventDefault();
-      let files = e.target.files;
-      this.presents[2].photo = files[0];
+    onFileChange3: function (e) {
+      e.preventDefault()
+      let files = e.target.files
+      this.presents[2].photo = files[0]
       this.createImage3(files[0])
     },
     createImage3 (file) {
@@ -369,32 +370,45 @@ export default {
             present_amount: this.presents[0].present_amount,
             present_price: this.presents[0].present_price,
             required: this.presents[0].required,
-            impression: this.presents[0].impression,
+            impression: this.presents[0].impression
           },
           {
             present_name: this.presents[1].present_name,
             present_amount: this.presents[1].present_amount,
             present_price: this.presents[1].present_price,
             required: this.presents[1].required,
-            impression: this.presents[1].impression,
+            impression: this.presents[1].impression
           },
           {
             present_name: this.presents[2].present_name,
             present_amount: this.presents[2].present_amount,
             present_price: this.presents[2].present_price,
             required: this.presents[2].required,
-            impression: this.presents[2].impression,
+            impression: this.presents[2].impression
           }
         ],
-        article_id: this.article_id,
+        article_id: this.article_id
       }
-    )
+      )
+      this.$validator.validateAll().then(async result => {
+        if (result) {
+          this.updateIsLoading(true)
+          await Item.createItem(this.cred, this.form)
+            .then(() => {
+              this.updateIsLoading(false)
+            })
+            .catch(() => {
+              this.$message('投稿できませんでした')
+              this.updateIsLoading(false)
+            })
+        }
+      })
     }
   },
-  created: function() {
+  created: function () {
     axios.get('http://localhost:3000/presents/edit/2')
-    .then((res) => {
-    })
+      .then((res) => {
+      })
   }
 }
 </script>

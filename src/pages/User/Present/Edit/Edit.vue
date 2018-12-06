@@ -62,7 +62,6 @@
           <label class="cp_sl06_selectlabel">送る相手</label>
           </div>
 
-
           <div class="amount">
             <label>人数</label>
             <div class="input">
@@ -296,16 +295,16 @@ export default {
       ],
       form2: false,
       form3: false,
-      image1: "",
-      image2: "",
-      image3: ""
+      image1: '',
+      image2: '',
+      image3: ''
     }
   },
   methods: {
-    onFileChange1: function(e) {
-      e.preventDefault();
-      let files = e.target.files;
-      this.presents[0].photo = files[0];
+    onFileChange1: function (e) {
+      e.preventDefault()
+      let files = e.target.files
+      this.presents[0].photo = files[0]
       this.createImage1(files[0])
     },
     createImage1 (file) {
@@ -315,10 +314,10 @@ export default {
       }
       reader.readAsDataURL(file)
     },
-    onFileChange2: function(e) {
-      e.preventDefault();
-      let files = e.target.files;
-      this.presents[1].photo = files[0];
+    onFileChange2: function (e) {
+      e.preventDefault()
+      let files = e.target.files
+      this.presents[1].photo = files[0]
       this.createImage2(files[0])
     },
     createImage2 (file) {
@@ -328,10 +327,10 @@ export default {
       }
       reader.readAsDataURL(file)
     },
-    onFileChange3: function(e) {
-      e.preventDefault();
-      let files = e.target.files;
-      this.presents[2].photo = files[0];
+    onFileChange3: function (e) {
+      e.preventDefault()
+      let files = e.target.files
+      this.presents[2].photo = files[0]
       this.createImage3(files[0])
     },
     createImage3 (file) {
@@ -368,44 +367,57 @@ export default {
             present_amount: this.presents[0].present_amount,
             present_price: this.presents[0].present_price,
             required: this.presents[0].required,
-            impression: this.presents[0].impression,
+            impression: this.presents[0].impression
           },
           {
             present_name: this.presents[1].present_name,
             present_amount: this.presents[1].present_amount,
             present_price: this.presents[1].present_price,
             required: this.presents[1].required,
-            impression: this.presents[1].impression,
+            impression: this.presents[1].impression
           },
           {
             present_name: this.presents[2].present_name,
             present_amount: this.presents[2].present_amount,
             present_price: this.presents[2].present_price,
             required: this.presents[2].required,
-            impression: this.presents[2].impression,
+            impression: this.presents[2].impression
           }
         ],
-        article_id: this.article_id,
+        article_id: this.article_id
       }
-    )
+      )
+      this.$validator.validateAll().then(async result => {
+        if (result) {
+          this.updateIsLoading(true)
+          await Item.createItem(this.cred, this.form)
+            .then(() => {
+              this.updateIsLoading(false)
+            })
+            .catch(() => {
+              this.$message('投稿できませんでした')
+              this.updateIsLoading(false)
+            })
+        }
+      })
     }
   },
-  created: function() {
+  created: function () {
     axios.get('http://localhost:3000/presents/edit/2')
-    .then((res) => {
-      for (var i = 0; i<3; i++){
-        if (res.data.presents[i]){
-          if (i == 1) this.form2 = true
-          if (i == 2) this.form3 = true
-          this.presents[i].present_name = res.data.presents[i].present_name
-          this.presents[i].present_amount = res.data.presents[i].present_amount
-          this.presents[i].present_price = res.data.presents[i].present_price
-          this.presents[i].required = res.data.presents[i].required
-          this.presents[i].impression = res.data.presents[i].impression
-          this.presents[i].photo = res.data.presents[i].photo
+      .then((res) => {
+        for (var i = 0; i < 3; i++) {
+          if (res.data.presents[i]) {
+            if (i === 1) this.form2 = true
+            if (i === 2) this.form3 = true
+            this.presents[i].present_name = res.data.presents[i].present_name
+            this.presents[i].present_amount = res.data.presents[i].present_amount
+            this.presents[i].present_price = res.data.presents[i].present_price
+            this.presents[i].required = res.data.presents[i].required
+            this.presents[i].impression = res.data.presents[i].impression
+            this.presents[i].photo = res.data.presents[i].photo
+          }
         }
-      }
-    })
+      })
   }
 }
 </script>
