@@ -11,7 +11,9 @@
           @submit.prevent="handleSubmit"
           class="w__form"
         >
-
+        <div>
+          <img src="home/otter/pbl2/pbl-tourlocus-api2/public/uploads/default.jpg">
+        </div>
         <div class="article">
           <p>{{this.article_name}}</p>
         </div>
@@ -376,7 +378,7 @@ export default {
             present_price: this.presents[0].present_price,
             required: this.presents[0].required,
             impression: this.presents[0].impression,
-            image: "image1"
+            image: "image1",
             impression: this.presents[0].impression
           },
           {
@@ -385,7 +387,7 @@ export default {
             present_price: this.presents[1].present_price,
             required: this.presents[1].required,
             impression: this.presents[1].impression,
-            image: "image2"
+            image: "image2",
             impression: this.presents[1].impression
           },
           {
@@ -394,19 +396,17 @@ export default {
             present_price: this.presents[2].present_price,
             required: this.presents[2].required,
             impression: this.presents[2].impression,
-            image: "image3"
+            image: "image3",
             impression: this.presents[2].impression
           }
         ],
         article_id: this.article_id
       }
-    ).then(response => {
-      axios.post('http://localhost:3000/presents/create_image', form)
-    }).catch(err => {
-      console.log('err:', err);
-    });
-    }
-      )
+      ).then(response => {
+        axios.post('http://localhost:3000/presents/create_image', form)
+      }).catch(err => {
+        console.log('err:', err)
+      })
       this.$validator.validateAll().then(async result => {
         if (result) {
           this.updateIsLoading(true)

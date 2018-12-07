@@ -384,3 +384,24 @@
   0% {transform: rotate(0deg);}
   100% {transform: rotate(360deg);}
 }
+
+.w-actionBtn {
+  display: flex;
+  justify-content: center;
+
+  .el-input {
+    width: 300px;
+
+    /deep/ .el-input__inner {
+      background: #42b983;
+      color: #fff;
+      font-size: 18px;
+      height: 48px;
+      border: 1px solid #ddd;
+    }
+  }
+}
+
+.mtmb {
+  margin: 26px 0;
+}

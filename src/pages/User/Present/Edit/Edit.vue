@@ -7,6 +7,7 @@
 
       <div class="main">
         <form
+          @submit.prevent="handleSubmit"
           class="w__form"
         >
 
@@ -14,18 +15,6 @@
           <p>{{this.article_name}}</p>
         </div>
 
-          <div class="cp_ipselect">
-          <select class="cp_sl06" required v-model="article_id">
-            <option value="" hidden disabled selected></option>
-            <option value="item1">item1</option>
-            <option value="item2">item2</option>
-            <option value="item3">item3</option>
-            <option value="item4">item4</option>
-          </select>
-          <span class="cp_sl06_highlight"></span>
-          <span class="cp_sl06_selectbar"></span>
-        <label class="cp_sl06_selectlabel">記事選択</label>
-        </div>
         <div class="present" v-if="form3">
 
           <img class="showimg" v-show="image3" :src="image3" />
@@ -35,7 +24,7 @@
           </div>
 
           <div class="cp_ipselect">
-            <select class="cp_sl06" omiyage v-model="presents[2].omiyage">
+            <select class="cp_sl06" omiyage v-model="presents[2].present_type">
               <option value="" hidden disabled selected></option>
               <option value="洋菓子">洋菓子</option>
               <option value="和菓子">和菓子</option>
@@ -61,6 +50,7 @@
             <span class="cp_sl06_selectbar"></span>
           <label class="cp_sl06_selectlabel">送る相手</label>
           </div>
+
 
           <div class="amount">
             <label>人数</label>
@@ -101,14 +91,14 @@
 
         <div class="present" v-if="form2">
 
-          <img class="showimg" v-show="presents[1].photo" :src="presents[1].photo" />
+          <img class="showimg" v-show="image2" :src="image2" />
           <div class="file">
             写真の選択
             <input type="file" v-on:change="onFileChange2">
           </div>
 
           <div class="cp_ipselect">
-            <select class="cp_sl06" omiyage v-model="presents[1].omiyage">
+            <select class="cp_sl06" omiyage v-model="presents[1].present_type">
               <option value="" hidden disabled selected></option>
               <option value="洋菓子">洋菓子</option>
               <option value="和菓子">和菓子</option>
@@ -147,259 +137,115 @@
             </div>
           </div>
 
-                <form
-                  @submit.prevent="handleSubmit"
-                  class="w__form"
-                >
-
-                <div class="article">
-                  <p>{{this.article_name}}</p>
-                </div>
-
-                  <div class="cp_ipselect">
-                  <select class="cp_sl06" v-model="article_id">
-                    <option value="" hidden disabled selected></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                  </select>
-                  <span class="cp_sl06_highlight"></span>
-                  <span class="cp_sl06_selectbar"></span>
-                <label class="cp_sl06_selectlabel">記事選択</label>
-                </div>
-                <div class="present" v-if="form3">
-
-                  <img class="showimg" v-show="image3" :src="image3" />
-                  <div class="file">
-                    写真の選択
-                    <input type="file" v-on:change="onFileChange3">
-                  </div>
-
-                  <div class="cp_ipselect">
-                    <select class="cp_sl06" omiyage v-model="presents[2].present_type">
-                      <option value="" hidden disabled selected></option>
-                      <option value="洋菓子">洋菓子</option>
-                      <option value="和菓子">和菓子</option>
-                      <option value="キーホルダー">キーホルダー</option>
-                      <option value="人形">人形</option>
-                      <option value="飲料">飲料</option>
-                      <option value="その他">その他</option>
-                    </select>
-                    <span class="cp_sl06_highlight"></span>
-                    <span class="cp_sl06_selectbar"></span>
-                    <label class="cp_sl06_selectlabel">種類</label>
-                  </div>
-
-                  <div class="cp_ipselect">
-                    <select class="cp_sl06" required v-model="presents[2].required">
-                      <option value="" hidden disabled selected></option>
-                      <option value="両親">両親</option>
-                      <option value="友達">友達</option>
-                      <option value="上司">上司</option>
-                      <option value="親戚">親戚</option>
-                    </select>
-                    <span class="cp_sl06_highlight"></span>
-                    <span class="cp_sl06_selectbar"></span>
-                  <label class="cp_sl06_selectlabel">送る相手</label>
-                  </div>
-
-
-                  <div class="amount">
-                    <label>人数</label>
-                    <div class="input">
-                      <input
-                        type="text"
-                        name="present_amount3"
-                        required
-                        v-model.trim="presents[2].present_amount"
-                      />人
-                    </div>
-                  </div>
-
-                  <div class="price">
-                    <label>単価</label>
-                    <div class="input">
-                      <input
-                        type="text"
-                        name="present_price3"
-                        required
-                        v-model.trim="presents[2].present_price"
-                      />円
-                    </div>
-                  </div>
-
-                  <div class="w__field mt20mb20">
-                    <label>感想</label>
-                    <div class="input">
-                      <textarea
-                        name="impression3"
-                        required
-                        v-model.trim="presents[2].impression"
-                      />
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="present" v-if="form2">
-
-                  <img class="showimg" v-show="image2" :src="image2" />
-                  <div class="file">
-                    写真の選択
-                    <input type="file" v-on:change="onFileChange2">
-                  </div>
-
-                  <div class="cp_ipselect">
-                    <select class="cp_sl06" omiyage v-model="presents[1].present_type">
-                      <option value="" hidden disabled selected></option>
-                      <option value="洋菓子">洋菓子</option>
-                      <option value="和菓子">和菓子</option>
-                      <option value="キーホルダー">キーホルダー</option>
-                      <option value="人形">人形</option>
-                      <option value="飲料">飲料</option>
-                      <option value="その他">その他</option>
-                    </select>
-                    <span class="cp_sl06_highlight"></span>
-                    <span class="cp_sl06_selectbar"></span>
-                    <label class="cp_sl06_selectlabel">種類</label>
-                  </div>
-
-                  <div class="cp_ipselect">
-                    <select class="cp_sl06" required v-model="presents[1].required">
-                      <option value="" hidden disabled selected></option>
-                      <option value="両親">両親</option>
-                      <option value="友達">友達</option>
-                      <option value="上司">上司</option>
-                      <option value="親戚">親戚</option>
-                    </select>
-                    <span class="cp_sl06_highlight"></span>
-                    <span class="cp_sl06_selectbar"></span>
-                  <label class="cp_sl06_selectlabel">送る相手</label>
-                  </div>
-
-                  <div class="amount">
-                    <label>人数</label>
-                    <div class="input">
-                      <input
-                        type="text"
-                        name="present_amount2"
-                        required
-                        v-model.trim="presents[1].present_amount"
-                      />人
-                    </div>
-                  </div>
-
-                  <div class="price">
-                    <label>単価</label>
-                    <div class="input">
-                      <input
-                        type="text"
-                        name="present_price2"
-                        required
-                        v-model.trim="presents[1].present_price"
-                      />円
-                    </div>
-                  </div>
-
-                  <div class="w__field mt20mb20">
-                    <label>感想</label>
-                    <div class="input">
-                      <textarea
-                        name="impression2"
-                        required
-                        v-model.trim="presents[1].impression"
-                      />
-                    </div>
-                  </div>
-
-                </div>
-
-                <div class="present">
-
-                  <img class="showimg" v-show="image1" :src="image1" />
-                  <div class="file">
-                    写真の選択
-                    <input type="file" v-on:change="onFileChange1">
-                  </div>
-
-                  <div class="cp_ipselect">
-                    <select class="cp_sl06" omiyage v-model="presents[0].present_type">
-                      <option value="" hidden disabled selected></option>
-                      <option value="洋菓子">洋菓子</option>
-                      <option value="和菓子">和菓子</option>
-                      <option value="キーホルダー">キーホルダー</option>
-                      <option value="人形">人形</option>
-                      <option value="飲料">飲料</option>
-                      <option value="その他">その他</option>
-                    </select>
-                    <span class="cp_sl06_highlight"></span>
-                    <span class="cp_sl06_selectbar"></span>
-                    <label class="cp_sl06_selectlabel">種類</label>
-                  </div>
-
-                  <div class="cp_ipselect">
-                    <select class="cp_sl06" required v-model="presents[0].required">
-                      <option value="" hidden disabled selected></option>
-                      <option value="両親">両親</option>
-                      <option value="友達">友達</option>
-                      <option value="上司">上司</option>
-                      <option value="親戚">親戚</option>
-                    </select>
-                    <span class="cp_sl06_highlight"></span>
-                    <span class="cp_sl06_selectbar"></span>
-                  <label class="cp_sl06_selectlabel">送る相手</label>
-                  </div>
-
-                  <div class="amount">
-                    <label>人数</label>
-                    <div class="input">
-                      <input
-                        type="text"
-                        name="present_amount"
-                        required
-                        v-model.trim="presents[0].present_amount"
-                      />人
-                    </div>
-                  </div>
-
-                  <div class="price">
-                    <label>単価</label>
-                    <div class="input">
-                      <input
-                        type="text"
-                        name="present_price"
-                        required
-                        v-model.trim="presents[0].present_price"
-                      />円
-                    </div>
-                  </div>
-
-                  <div class="w__field mt20mb20">
-                    <label>感想</label>
-                    <div class="input">
-                      <textarea
-                        required
-                        name="impression"
-                        v-model.trim="presents[0].impression"
-                      />
-                    </div>
-                  </div>
-
-                  <div class="actionBtn">
-
-                      <input
-                        type="submit"
-                        value="投稿する"
-                      />
-
-                  </div>
-                </div>
-                </form>
-              </div>
+          <div class="price">
+            <label>単価</label>
+            <div class="input">
+              <input
+                type="text"
+                name="present_price2"
+                required
+                v-model.trim="presents[1].present_price"
+              />円
             </div>
           </div>
-        </template>
+
+          <div class="w__field mt20mb20">
+            <label>感想</label>
+            <div class="input">
+              <textarea
+                name="impression2"
+                required
+                v-model.trim="presents[1].impression"
+              />
+            </div>
+          </div>
+
+        </div>
+
+        <div class="present">
+
+          <img class="showimg" v-show="image1" :src="image1" />
+          <div class="file">
+            写真の選択
+            <input type="file" v-on:change="onFileChange1">
+          </div>
+
+          <div class="cp_ipselect">
+            <select class="cp_sl06" omiyage v-model="presents[0].present_type">
+              <option value="" hidden disabled selected></option>
+              <option value="洋菓子">洋菓子</option>
+              <option value="和菓子">和菓子</option>
+              <option value="キーホルダー">キーホルダー</option>
+              <option value="人形">人形</option>
+              <option value="飲料">飲料</option>
+              <option value="その他">その他</option>
+            </select>
+            <span class="cp_sl06_highlight"></span>
+            <span class="cp_sl06_selectbar"></span>
+            <label class="cp_sl06_selectlabel">種類</label>
+          </div>
+
+          <div class="cp_ipselect">
+            <select class="cp_sl06" required v-model="presents[0].required">
+              <option value="" hidden disabled selected></option>
+              <option value="両親">両親</option>
+              <option value="友達">友達</option>
+              <option value="上司">上司</option>
+              <option value="親戚">親戚</option>
+            </select>
+            <span class="cp_sl06_highlight"></span>
+            <span class="cp_sl06_selectbar"></span>
+          <label class="cp_sl06_selectlabel">送る相手</label>
+          </div>
+
+          <div class="amount">
+            <label>人数</label>
+            <div class="input">
+              <input
+                type="text"
+                name="present_amount"
+                required
+                v-model.trim="presents[0].present_amount"
+              />人
+            </div>
+          </div>
+
+          <div class="price">
+            <label>単価</label>
+            <div class="input">
+              <input
+                type="text"
+                name="present_price"
+                required
+                v-model.trim="presents[0].present_price"
+              />円
+            </div>
+          </div>
+
+          <div class="w__field mt20mb20">
+            <label>感想</label>
+            <div class="input">
+              <textarea
+                required
+                name="impression"
+                v-model.trim="presents[0].impression"
+              />
+            </div>
+          </div>
+
+          <div class="w-actionBtn">
+            <el-input
+              type="submit"
+              value="投稿する"
+              v-loading="isLoading"
+            />
+          </div>
+        </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
 
 <script>
 import axios from 'axios'
@@ -408,6 +254,7 @@ export default {
   name: 'EditPresent',
   data () {
     return {
+      isLoading: false,
       article_name: '記事a',
       article_id: 'item1',
       presents: [
@@ -444,6 +291,9 @@ export default {
     }
   },
   methods: {
+    updateIsLoading (v) {
+      this.isLoading = v
+    },
     onFileChange1: function (e) {
       e.preventDefault()
       let files = e.target.files
@@ -499,6 +349,19 @@ export default {
       }
     },
     handleSubmit () {
+      this.$validator.validateAll().then(async result => {
+        if (result) {
+          this.updateIsLoading(true)
+          await Item.createItem(this.cred, this.form)
+            .then(() => {
+              this.updateIsLoading(false)
+            })
+            .catch(() => {
+              this.$message('投稿できませんでした')
+              this.updateIsLoading(false)
+            })
+        }
+      })
     }
   },
   created: function() {
@@ -515,6 +378,8 @@ export default {
           this.presents[i].required = res.data.presents[i].required
           this.presents[i].impression = res.data.presents[i].impression
           this.presents[i].photo = res.data.presents[i].photo
+
+        }
       const form = new FormData()
       form.append('photo1', this.presents[0].photo)
       form.append('photo2', this.presents[1].photo)
@@ -547,23 +412,7 @@ export default {
         article_id: this.article_id
       }
       )
-      this.$validator.validateAll().then(async result => {
-        if (result) {
-          this.updateIsLoading(true)
-          await Item.createItem(this.cred, this.form)
-            .then(() => {
-              this.updateIsLoading(false)
-            })
-            .catch(() => {
-              this.$message('投稿できませんでした')
-              this.updateIsLoading(false)
-            })
-        }
-      })
-    }
-  },
-  created: function () {
-    axios.get('http://localhost:3000/presents/edit/2')
+      axios.get('http://localhost:3000/presents/edit/2')
       .then((res) => {
         for (var i = 0; i < 3; i++) {
           if (res.data.presents[i]) {
@@ -578,7 +427,9 @@ export default {
           }
         }
       })
-  }
+      }
+    }
+    )}
 }
 </script>
 
