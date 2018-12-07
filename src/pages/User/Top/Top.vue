@@ -5,28 +5,34 @@
 
         <!-- 読み込み中 -->
         <template v-if="isLoading">
+          <el-container
+            v-loading.fullscreen="isLoading"
+          />
         </template>
 
         <!-- コンテンツ表示 -->
         <template v-else>
           <user-profile
-            :name="user.userName"
+            :name="user.user_name"
             :icon="user.icon"
             :intro="user.intro"
-            :param="param.params"
+            :me="me"
           />
 
-          <div class="tab">
-            <ul>
-              <li>
-                <router-link to="/">Items</router-link>
-              </li>
-              <li>
-                <router-link to="/">Favorites</router-link>
-              </li>
-            </ul>
-          </div>
+          <!-- タブ -->
+          <el-tabs
+            v-model="activeTabName"
+            type="card"
+          >
+            <el-tab-pane label="Items" name="Items">
+              <!-- 自分の記事一覧 -->
+            </el-tab-pane>
 
+            <el-tab-pane label="Favorites" name="Favorites">
+              <!-- お気に入り記事一覧 -->
+            </el-tab-pane>
+
+          </el-tabs>
         </template>
 
       </div>
@@ -38,6 +44,7 @@
 import {User} from '../../../api'
 import {UserProfile} from '../../../components'
 import {mapState} from 'vuex'
+import {Sleep} from '../../../utils'
 
 export default {
   name: 'MyPage',
@@ -47,12 +54,13 @@ export default {
   data () {
     return {
       user: null,
+      activeTabName: 'Items',
       isLoading: false
     }
   },
   computed: {
-    ...mapState('route', {
-      param: state => state.params
+    ...mapState('user', {
+      me: state => state
     })
   },
   methods: {
@@ -62,8 +70,17 @@ export default {
   },
   async created () {
     this.updateIsLoading(true)
-    this.user = await User.getItems(this.$route.params.params)
-    this.updateIsLoading(false)
+    await User.getItems(this.$route.params.params)
+      .then(async res => {
+        await Sleep(2000)
+        this.user = res
+        this.updateIsLoading(false)
+      })
+      .catch(async () => {
+        await Sleep(2000)
+        this.$message('エラーが発生しました')
+        this.updateIsLoading(false)
+      })
   }
 }
 </script>

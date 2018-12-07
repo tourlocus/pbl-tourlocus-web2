@@ -8,7 +8,7 @@
 
         <div class="w-name">
           <span>@{{ name }}</span>
-          <template v-if="param == name">
+          <template v-if="me.name == name">
             <el-button size="mini">プロフィールを編集</el-button>
           </template>
           <template v-else>
@@ -39,7 +39,7 @@
 <script>
 export default {
   name: 'UserProfileComponent',
-  props: ['name', 'icon', 'intro', 'param'],
+  props: ['name', 'icon', 'intro', 'me'],
   created () {
     console.log(this.param)
   }

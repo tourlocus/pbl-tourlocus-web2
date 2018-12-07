@@ -1,5 +1,8 @@
 import {createItem} from './post'
+import {getDetail, getEdit} from './get'
 
 export const Item = {
-  createItem
+  createItem,
+  getDetail,
+  getEdit
 }

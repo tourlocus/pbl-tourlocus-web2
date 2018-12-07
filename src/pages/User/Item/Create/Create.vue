@@ -24,8 +24,17 @@
             <el-input
               maxlength="30"
               v-model.trim="form.title"
+              name="title"
+              v-validate="{required: true}"
               placeholder="〇〇に行ってきた。"
             />
+            <div
+              class="form__error"
+              v-if="errors.has('title')"
+            >
+              タイトルは必須です
+            </div>
+
           </div>
 
           <!-- ファイル -->
@@ -64,8 +73,16 @@
             <label>本文</label>
             <el-input
               v-model="form.content"
+              name="content"
+              v-validate="{required: true}"
               type="textarea"
             />
+            <div
+              class="form__error"
+              v-if="errors.has('content')"
+            >
+              本文は必須です
+            </div>
           </div>
 
           <!-- サブミット -->
