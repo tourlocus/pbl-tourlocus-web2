@@ -8,15 +8,15 @@
           <a href="#" class="square_btn">人気順</a>
         </div>
 
-        <div id="Articlecard">
-          <article-card v-for="item in articles"
+        <div id="ItemCard">
+          <ItemCard v-for="item in articles"
           v-bind:key="item.id"
           v-bind:username="item.username"
           v-bind:icon="item.icon"
           v-bind:photo="item.photo"
           v-bind:title="item.title"
           v-bind:content="item.content">
-          </article-card>
+          </ItemCard>
         </div>
       </div>
     </div>
@@ -25,53 +25,33 @@
 
 <script>
 import {Header as CommonHeader} from '../../layouts'
-import {SearchForm} from '../../components'
-import Vue from 'vue'
+import {SearchForm, ItemCard} from '../../components'
 
-Vue.component('article-card', {
-  template: '<section class="card">' +
-    '<img class="card-img" src="../../assets/photo1.jpg" alt="">' +
-    '<div class="card-content">' +
-    '<img class="card-icon" src="../../assets/icon1.png">' +
-    '<div class="username">' +
-    '{{username}}' +
-    '</div>' +
-    '<h1 class="card-title">{{title}}</h1>' +
-    '<p class="card-text">{{content}}</p>' +
-    '</div>' +
-    '<div class="card-link">' +
-    '<a href="#"></a>' +
-    '<a href="#">もっと見る</a>' +
-    '</div></section>',
-  props: ['id', 'username', 'photo', 'icon', 'title', 'content']
+new Vue({
+  el: '#ItemCard',
+  data: {
+    articles: [
+      {
+        id: 1,
+        username: 'hogehoge',
+        photo: '../../assets.pphoto1.jpg',
+        icon: '../../accets.icon1.png',
+        title: 'title',
+        content: 'main_text'
+      }
+    ]
+  }
 })
 
 export default {
   name: 'Top',
   components: {
     CommonHeader,
-    SearchForm
+    SearchForm,
+    ItemCard
   },
   data () {
     return {
-      articles: [
-        {
-          id: '1',
-          username: 'Taro_yamada',
-          photo: '',
-          icon: '',
-          title: 'title',
-          content: 'maintext'
-        },
-        {
-          id: '2',
-          username: 'Hanako_Yamada',
-          photo: '',
-          icon: '',
-          title: 'タイトル',
-          content: 'てきすと'
-        }
-      ]
     }
   },
   methods: {
