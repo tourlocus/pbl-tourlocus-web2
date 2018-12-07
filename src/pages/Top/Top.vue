@@ -8,25 +8,8 @@
           <a href="#" class="square_btn">人気順</a>
         </div>
 
-        <section class="card">
-          <img class="card-img" src="../../assets/photo1.jpg" alt="">
-          <div class="card-content">
-            <img class="card-icon" src="../../assets/icon1.png">
-            <div class="username">
-              {{username}}
-            </div>
-          <h1 class="card-title">{{title}}</h1>
-          <p class="card-text">{{content}}</p>
-          </div>
-          <div class="card-link">
-            <a href="#"></a>
-            <a href="#">もっと見る</a>
-          </div>
-        </section>
-
-
         <div id="Articlecard">
-          <article-card v-for="item in article"
+          <article-card v-for="item in articles"
           v-bind:key="item.id"
           v-bind:username="item.username"
           v-bind:icon="item.icon"
@@ -60,7 +43,7 @@ Vue.component('article-card', {
     '<a href="#"></a>' +
     '<a href="#">もっと見る</a>' +
     '</div></section>',
-  props: ['id', 'username', 'title', 'content']
+  props: ['id', 'username', 'photo', 'icon', 'title', 'content']
 })
 
 export default {
@@ -74,10 +57,19 @@ export default {
       articles: [
         {
           id: '1',
-          username: 'ho',
-          icon: 'sample.png',
-          title: 'samplesample',
-          content: 'samplesamplesamnplesample'
+          username: 'Taro_yamada',
+          photo: '',
+          icon: '',
+          title: 'title',
+          content: 'maintext'
+        },
+        {
+          id: '2',
+          username: 'Hanako_Yamada',
+          photo: '',
+          icon: '',
+          title: 'タイトル',
+          content: 'てきすと'
         }
       ]
     }
