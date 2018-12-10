@@ -6,15 +6,28 @@
     <button @click="deletemain" class="deletemain">-</button>
 
       <div class="main">
-        <form
-          @submit.prevent="handleSubmit"
-          class="w__form"
-        >
 
         <div class="article">
           <p>{{this.article_name}}</p>
         </div>
 
+        <form
+          @submit.prevent="handleSubmit"
+          class="w__form"
+        >
+
+          <div class="cp_ipselect">
+          <select class="cp_sl06" v-model="article_id">
+            <option value="" hidden disabled selected></option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+          <span class="cp_sl06_highlight"></span>
+          <span class="cp_sl06_selectbar"></span>
+        <label class="cp_sl06_selectlabel">記事選択</label>
+        </div>
         <div class="present" v-if="form3">
 
           <img class="showimg" v-show="image3" :src="image3" />
@@ -164,7 +177,7 @@
 
         <div class="present">
 
-          <img class="showimg" v-show="image1" :src="image1" />
+          <img class="showimg" v-show="`${image1}`" :src="`${image1}`" />
           <div class="file">
             写真の選択
             <input type="file" v-on:change="onFileChange1">
@@ -233,18 +246,18 @@
             </div>
           </div>
 
-          <div class="w-actionBtn">
-            <el-input
-              type="submit"
-              value="投稿する"
-              v-loading="isLoading"
-            />
+          <div class="actionBtn">
+              <input
+                type="submit"
+                value="投稿する"
+              />
           </div>
         </div>
-        </form>
-      </div>
+
+      </form>
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -304,7 +317,6 @@ export default {
       let reader = new FileReader()
       reader.onload = e => {
         this.image1 = e.target.result
-        console.log(this.image1)
       }
       reader.readAsDataURL(file)
     },
@@ -362,7 +374,10 @@ export default {
             })
         }
       })
-    }
+    },
+  test (res, i) {
+
+  }
   },
   created: function() {
     axios.get('http://localhost:3000/presents/edit/10')
@@ -370,66 +385,28 @@ export default {
       this.article_id = res.data.article_id
       for (var i = 0; i<3; i++){
         if (res.data.presents[i]){
-          if (i == 1) this.form2 = true
-          if (i == 2) this.form3 = true
+          if (i == 0) this.image1 = require(`${res.data.presents[i].photo}`)
+          // if (i == 1) {
+          //   this.form2 = true
+          //   this.image2 = res.data.presents[i].photo
+          //   console.log(res.data.presents[i].photo)
+          //   this.test(res, i)
+          //   // console.log(str.slice(res.data.presents[i].photo.lastIndexOf('pbl-tourlocus-api')))
+          //   // /static/img/5377877_624.449854c.jpg
+          // }
+          // if (i == 2) {
+          //   this.form3 = true
+          //   this.image3 = res.data.presents[i].photo
+          // }
           this.presents[i].present_name = res.data.presents[i].present_name
           this.presents[i].present_amount = res.data.presents[i].present_amount
           this.presents[i].present_price = res.data.presents[i].present_price
           this.presents[i].required = res.data.presents[i].required
           this.presents[i].impression = res.data.presents[i].impression
-          this.presents[i].photo = res.data.presents[i].photo
-
         }
-      const form = new FormData()
-      form.append('photo1', this.presents[0].photo)
-      form.append('photo2', this.presents[1].photo)
-      form.append('photo3', this.presents[2].photo)
-
-      axios.post('http://localhost:3000/presents/create', {
-        presents: [
-          {
-            present_name: this.presents[0].present_name,
-            present_amount: this.presents[0].present_amount,
-            present_price: this.presents[0].present_price,
-            required: this.presents[0].required,
-            impression: this.presents[0].impression
-          },
-          {
-            present_name: this.presents[1].present_name,
-            present_amount: this.presents[1].present_amount,
-            present_price: this.presents[1].present_price,
-            required: this.presents[1].required,
-            impression: this.presents[1].impression
-          },
-          {
-            present_name: this.presents[2].present_name,
-            present_amount: this.presents[2].present_amount,
-            present_price: this.presents[2].present_price,
-            required: this.presents[2].required,
-            impression: this.presents[2].impression
-          }
-        ],
-        article_id: this.article_id
       }
-      )
-      axios.get('http://localhost:3000/presents/edit/2')
-      .then((res) => {
-        for (var i = 0; i < 3; i++) {
-          if (res.data.presents[i]) {
-            if (i === 1) this.form2 = true
-            if (i === 2) this.form3 = true
-            this.presents[i].present_name = res.data.presents[i].present_name
-            this.presents[i].present_amount = res.data.presents[i].present_amount
-            this.presents[i].present_price = res.data.presents[i].present_price
-            this.presents[i].required = res.data.presents[i].required
-            this.presents[i].impression = res.data.presents[i].impression
-            this.presents[i].photo = res.data.presents[i].photo
-          }
-        }
-      })
-      }
-    }
-    )}
+    })
+  }
 }
 </script>
 

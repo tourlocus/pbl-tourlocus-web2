@@ -421,11 +421,6 @@ export default {
         }
       })
     }
-  },
-  created: function () {
-    axios.get('http://localhost:3000/presents/edit/2')
-      .then((res) => {
-      })
   }
 }
 </script>
