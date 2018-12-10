@@ -1,8 +1,8 @@
 <template>
     <section class="card">
-        <img class="card-img" src="../assets/photo1.jpg" alt="">
+        <img class="card-img" src="" alt="">
         <div class="card-content">
-            <img class="card-icon" src="../icon1.png">
+            <img class="card-icon" src="">
             <div class="username">
                 {{username}}
             </div>
@@ -17,23 +17,9 @@
 </template>
 
 <script>
-Vue.component('card', {
-    props: ['articles'],
-    template:
-    <ItemCard v-for="item in articles"
-          v-bind:key="item.id"
-          v-bind:username="item.username"
-          v-bind:icon="item.icon"
-          v-bind:photo="item.photo"
-          v-bind:title="item.title"
-          v-bind:content="item.content">
-    </ItemCard>
-})
-
 export default {
-    name: 'ItemCard',
-    props: {src: {}},
-    methods: {
+  name: 'ItemCard',
+  methods: {
   }
 }
 </script>
