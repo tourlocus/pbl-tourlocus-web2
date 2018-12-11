@@ -4,7 +4,7 @@ import router from '../../router'
 // 編集画面
 export const getEdit = async (cred, id) => {
   try {
-    const endpoints = ''
+    const endpoints = 'articles/'
     const response = await axios({
       url: `${process.env.NODE_BACKEND}${endpoints}${id}`,
       method: 'GET',
@@ -15,6 +15,9 @@ export const getEdit = async (cred, id) => {
       }
     })
     if (response.status === 200) {
+      const result = response.data
+
+      return result
     }
   } catch (error) {
     console.log(error)

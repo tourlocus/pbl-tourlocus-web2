@@ -3,6 +3,15 @@
     <div class="container">
       <div class="main">
 
+        <!-- ローディング -->
+        <template>
+          <el-container
+            v-loading.fullscreen="isLoading"
+          />
+        </template>
+
+        <!--  -->
+
         <!-- フォーム -->
         <form @submit.prevent="handleSubmit">
 
@@ -73,7 +82,7 @@
             <el-input
               type="submit"
               value="投稿する"
-              v-loading="isLoading"
+              v-loading="isSubmitLoading"
             />
           </div>
         </form>
@@ -85,6 +94,7 @@
 
 <script>
 import {Item} from '../../../../api'
+import {Sleep, editResponseFormat} from '../../../../utils'
 import {mapState} from 'vuex'
 import VueTagsInput from '@johmun/vue-tags-input'
 
@@ -103,7 +113,8 @@ export default {
       },
       tag: '',
       images: [],
-      isLoading: false
+      isLoading: false,
+      isSubmitLoading: false
     }
   },
   computed: {
@@ -114,6 +125,9 @@ export default {
   methods: {
     updateIsLoading (v) {
       this.isLoading = v
+    },
+    updateIsSubmitLoading (v) {
+      this.isSubmitLoading = v
     },
     // ファイルセレクト
     handleFileSelect (e) {
@@ -141,23 +155,41 @@ export default {
     },
     // サブミット
     handleSubmit () {
+      const id = this.$route.params.id
       this.$validator.validateAll().then(async result => {
         if (result) {
-          this.updateIsLoading(true)
-          await Item.createItem(this.cred, this.form)
+          this.updateIsSubmitLoading(true)
+          await Item.updateItem(this.cred, id, this.form)
             .then(() => {
-              this.updateIsLoading(false)
+              this.updateIsSubmitLoading(false)
             })
             .catch(() => {
-              this.$message('投稿できませんでした。')
-              this.updateIsLoading(false)
+              this.$message('更新できませんでした。')
+              this.updateIsSubmitLoading(false)
             })
         }
       })
     }
   },
-  created () {
-
+  // 読み込み
+  async created () {
+    const id = this.$route.params.id
+    this.updateIsLoading(true)
+    await Item.getEdit(this.cred, id)
+      .then(async res => {
+        await Sleep(2000)
+        const s = editResponseFormat(res)
+        this.form.tags = s.tags
+        this.form.title = s.title
+        this.images = s.meida
+        this.form.content = s.content
+        this.updateIsLoading(false)
+      })
+      .catch(async () => {
+        await Sleep(2000)
+        this.updateIsLoading(false)
+        this.$message('記事を取得できませんでした')
+      })
   }
 }
 </script>

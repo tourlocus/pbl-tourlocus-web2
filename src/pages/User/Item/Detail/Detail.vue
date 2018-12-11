@@ -206,7 +206,6 @@ export default {
       .then(async res => {
         await Sleep(2000)
         this.item = res
-        console.log(res)
         this.updateIsLoading(false)
       })
       .catch(async () => {
