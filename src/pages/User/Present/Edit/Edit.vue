@@ -7,10 +7,6 @@
 
       <div class="main">
 
-        <div class="article">
-          <p>{{this.article_name}}</p>
-        </div>
-
         <form
           @submit.prevent="handleSubmit"
           class="w__form"
@@ -64,15 +60,14 @@
           <label class="cp_sl06_selectlabel">送る相手</label>
           </div>
 
-
           <div class="amount">
             <label>人数</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_amount3"
                 required
-                v-model.trim="presents[2].present_amount"
+                v-model.number="presents[2].present_amount"
               />人
             </div>
           </div>
@@ -81,10 +76,10 @@
             <label>単価</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_price3"
                 required
-                v-model.trim="presents[2].present_price"
+                v-model.number="presents[2].present_price"
               />円
             </div>
           </div>
@@ -142,10 +137,10 @@
             <label>人数</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_amount2"
                 required
-                v-model.trim="presents[1].present_amount"
+                v-model.number="presents[1].present_amount"
               />人
             </div>
           </div>
@@ -154,10 +149,10 @@
             <label>単価</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_price2"
                 required
-                v-model.trim="presents[1].present_price"
+                v-model.number="presents[1].present_price"
               />円
             </div>
           </div>
@@ -177,7 +172,7 @@
 
         <div class="present">
 
-          <img class="showimg" v-show="`${image1}`" :src="`${image1}`" />
+          <img class="showimg" v-show="image1" :src="image1" />
           <div class="file">
             写真の選択
             <input type="file" v-on:change="onFileChange1">
@@ -215,10 +210,10 @@
             <label>人数</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_amount"
                 required
-                v-model.trim="presents[0].present_amount"
+                v-model.number="presents[0].present_amount"
               />人
             </div>
           </div>
@@ -227,10 +222,10 @@
             <label>単価</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_price"
                 required
-                v-model.trim="presents[0].present_price"
+                v-model.number="presents[0].present_price"
               />円
             </div>
           </div>
@@ -246,14 +241,15 @@
             </div>
           </div>
 
-          <div class="actionBtn">
-              <input
-                type="submit"
-                value="投稿する"
-              />
+          <div class="w-actionBtn">
+            <el-input
+              type="submit"
+              value="投稿する"
+              v-loading="isLoading"
+            />
           </div>
-        </div>
 
+        </div>
       </form>
     </div>
   </div>
@@ -269,28 +265,28 @@ export default {
     return {
       isLoading: false,
       article_name: '記事a',
-      article_id: 'item1',
+      article_id: '1',
       presents: [
         {
           present_type: '洋菓子',
-          present_amount: 'amount1',
-          present_price: 'price1',
+          present_amount: '1',
+          present_price: '1',
           required: '両親',
           impression: 'impression1',
           photo: null
         },
         {
           present_type: '洋菓子',
-          present_amount: 'amount2',
-          present_price: 'price2',
+          present_amount: '2',
+          present_price: '2',
           required: '友達',
           impression: 'impression2',
           photo: null
         },
         {
           present_type: '洋菓子',
-          present_amount: 'amount3',
-          present_price: 'price3',
+          present_amount: '3',
+          present_price: '3',
           required: '親戚',
           impression: 'impression3',
           photo: null
@@ -374,10 +370,7 @@ export default {
             })
         }
       })
-    },
-  test (res, i) {
-
-  }
+    }
   },
   created: function() {
     axios.get('http://localhost:3000/presents/edit/10')
@@ -386,18 +379,16 @@ export default {
       for (var i = 0; i<3; i++){
         if (res.data.presents[i]){
           if (i == 0) this.image1 = require(`${res.data.presents[i].photo}`)
-          // if (i == 1) {
-          //   this.form2 = true
-          //   this.image2 = res.data.presents[i].photo
-          //   console.log(res.data.presents[i].photo)
-          //   this.test(res, i)
-          //   // console.log(str.slice(res.data.presents[i].photo.lastIndexOf('pbl-tourlocus-api')))
-          //   // /static/img/5377877_624.449854c.jpg
-          // }
-          // if (i == 2) {
-          //   this.form3 = true
-          //   this.image3 = res.data.presents[i].photo
-          // }
+          if (i == 1) {
+            this.form2 = true
+            this.image2 = res.data.presents[i].photo
+            console.log(res.data.presents[i].photo)
+            this.test(res, i)
+          }
+          if (i == 2) {
+            this.form3 = true
+            this.image3 = res.data.presents[i].photo
+          }
           this.presents[i].present_name = res.data.presents[i].present_name
           this.presents[i].present_amount = res.data.presents[i].present_amount
           this.presents[i].present_price = res.data.presents[i].present_price

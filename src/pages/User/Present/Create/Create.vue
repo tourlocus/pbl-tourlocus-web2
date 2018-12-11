@@ -11,12 +11,6 @@
           @submit.prevent="handleSubmit"
           class="w__form"
         >
-        <div>
-          <img src="home/otter/pbl2/pbl-tourlocus-api2/public/uploads/default.jpg">
-        </div>
-        <div class="article">
-          <p>{{this.article_name}}</p>
-        </div>
 
           <div class="cp_ipselect">
           <select class="cp_sl06" v-model="article_id">
@@ -70,10 +64,10 @@
             <label>人数</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_amount3"
                 required
-                v-model.trim="presents[2].present_amount"
+                v-model.number="presents[2].present_amount"
               />人
             </div>
           </div>
@@ -82,10 +76,10 @@
             <label>単価</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_price3"
                 required
-                v-model.trim="presents[2].present_price"
+                v-model.number="presents[2].present_price"
               />円
             </div>
           </div>
@@ -143,10 +137,10 @@
             <label>人数</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_amount2"
                 required
-                v-model.trim="presents[1].present_amount"
+                v-model.number="presents[1].present_amount"
               />人
             </div>
           </div>
@@ -155,10 +149,10 @@
             <label>単価</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_price2"
                 required
-                v-model.trim="presents[1].present_price"
+                v-model.number="presents[1].present_price"
               />円
             </div>
           </div>
@@ -216,10 +210,10 @@
             <label>人数</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_amount"
                 required
-                v-model.trim="presents[0].present_amount"
+                v-model.number="presents[0].present_amount"
               />人
             </div>
           </div>
@@ -228,10 +222,10 @@
             <label>単価</label>
             <div class="input">
               <input
-                type="text"
+                type="number"
                 name="present_price"
                 required
-                v-model.trim="presents[0].present_price"
+                v-model.number="presents[0].present_price"
               />円
             </div>
           </div>
@@ -254,6 +248,7 @@
               v-loading="isLoading"
             />
           </div>
+
         </div>
         </form>
       </div>
@@ -270,28 +265,28 @@ export default {
     return {
       isLoading: false,
       article_name: '記事a',
-      article_id: '10',
+      article_id: '1',
       presents: [
         {
           present_name: '洋菓子',
-          present_amount: 'amount1',
-          present_price: 'price1',
+          present_amount: '1',
+          present_price: '1',
           required: '両親',
           impression: 'impression1',
           photo: null
         },
         {
           present_name: '洋菓子',
-          present_amount: 'amount2',
-          present_price: 'price2',
+          present_amount: '2',
+          present_price: '2',
           required: '友達',
           impression: 'impression2',
           photo: null
         },
         {
           present_name: '洋菓子',
-          present_amount: 'amount3',
-          present_price: 'price3',
+          present_amount: '3',
+          present_price: '3',
           required: '親戚',
           impression: 'impression3',
           photo: null
