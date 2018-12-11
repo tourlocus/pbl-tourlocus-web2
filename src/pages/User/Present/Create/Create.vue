@@ -402,19 +402,19 @@ export default {
       }).catch(err => {
         console.log('err:', err)
       })
-      this.$validator.validateAll().then(async result => {
-        if (result) {
-          this.updateIsLoading(true)
-          await Item.createItem(this.cred, this.form)
-            .then(() => {
-              this.updateIsLoading(false)
-            })
-            .catch(() => {
-              this.$message('投稿できませんでした')
-              this.updateIsLoading(false)
-            })
-        }
-      })
+      // this.$validator.validateAll().then(async result => {
+      //   if (result) {
+      //     this.updateIsLoading(true)
+      //     await Item.createItem(this.cred, this.form)
+      //       .then(() => {
+      //         this.updateIsLoading(false)
+      //       })
+      //       .catch(() => {
+      //         this.$message('投稿できませんでした')
+      //         this.updateIsLoading(false)
+      //       })
+      //   }
+      // })
     }
   }
 }
