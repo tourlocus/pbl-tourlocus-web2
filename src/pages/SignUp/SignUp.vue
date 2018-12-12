@@ -174,10 +174,7 @@
 </template>
 
 <script>
-<<<<<<< HEAD
-=======
 import {User} from '../../api'
->>>>>>> origin/release
 import {mapActions} from 'vuex'
 
 export default {
@@ -233,20 +230,13 @@ export default {
     }
   },
   methods: {
-<<<<<<< HEAD
-    ...mapActions('auth', ['signUp']),
-=======
     ...mapActions('user', ['Login']),
     updateIsLoading (v) {
       this.isLoading = v
     },
->>>>>>> origin/release
     handleSubmit () {
       this.$validator.validateAll().then(async result => {
         if (result) {
-<<<<<<< HEAD
-          this.signUp(this.form)
-=======
           this.updateIsLoading(true)
           await User.signUpRequest(this.form)
             .then(res => {
@@ -257,7 +247,6 @@ export default {
               this.$message('新規登録に失敗しました。')
               this.updateIsLoading(false)
             })
->>>>>>> origin/release
         }
       })
     }
