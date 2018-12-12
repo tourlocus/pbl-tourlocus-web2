@@ -1,15 +1,20 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import auth from './auth'
-import article from './articles'
+import VuexPersist from 'vuex-persist'
+
+import user from './user'
 
 Vue.use(Vuex)
 
+const vuexLocal = new VuexPersist({
+  key: 'tourlocus-client'
+})
+
 const store = new Vuex.Store({
   modules: {
-    auth,
-    article
-  }
+    user
+  },
+  plugins: [vuexLocal.plugin]
 })
 
 export default store

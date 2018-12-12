@@ -1,76 +1,105 @@
 <template>
   <div id="header">
     <div class="main">
+
+      <!-- title -->
       <div class="title">
-        <router-link to="/">Tour Locus</router-link>
+        <div class="pc-only">
+          <router-link to="/">Tour Locus</router-link>
+        </div>
+        <div class="tablet-only">
+          <router-link to="/">
+            <img
+              src="../../assets/logo.png"
+              width="40px"
+              height="40px"
+            />
+          </router-link>
+        </div>
+
+        <div class="pc-only">
+          <div class="search">
+            <el-input prefix-icon="el-icon-search" />
+          </div>
+        </div>
+
       </div>
 
-      <template>
-        <form class="w__search-form pc-only">
-          <input type="search" />
-        </form>
-      </template>
+      <!-- ログイン後 -->
+      <template v-if="isAuth">
+        <div class="nava">
 
-      <template>
-        <div class="tablet-only w__search-icon">
-          <i class="fas fa-search"
-            @click="openSearch"
-          />
-        </div>
-      </template>
-
-      <template v-if="logStatus">
-        <div class="w__after-login">
-          <el-dropdown trigger="click">
-            <div class="after-button">
-              {{userName}}
-              <i class="el-icon-arrow-down el-icon--right" />
+          <div class="w-icon__group">
+            <div class="pc-only">
+              <div class="btn-group">
+                <el-button icon="el-icon-edit" @click="toItemCreate">記事を書く</el-button>
+                <el-button icon="el-icon-plus">お土産</el-button>
+              </div>
             </div>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <router-link :to="`/${userName}`">マイページ</router-link>
-              </el-dropdown-item>
 
-              <el-dropdown-item>
-                <router-link :to="`/${userName}/items/create`">投稿する</router-link>
-              </el-dropdown-item>
+            <!-- tablet, mobile  -->
+            <div class="tablet-only">
+              <div class="icon-group">
+                <span @click="toItemCreate">
+                  <i class="fas fa-edit" />
+                </span>
 
-              <el-dropdown-item>
-                <router-link to="/settings">設定</router-link>
-              </el-dropdown-item>
+                <span>
+                  <i class="fas fa-plus" />
+                </span>
 
-              <el-dropdown-item>
-                <router-link to="/signout">ログアウト</router-link>
-              </el-dropdown-item>
+                <span>
+                  <i class="fas fa-search" />
+                </span>
+              </div>
+            </div>
+          </div>
 
-            </el-dropdown-menu>
-          </el-dropdown>
+          <div class="menu">
+            <el-dropdown trigger="click">
+              <span>
+                <i class="fas fa-ellipsis-v" />
+              </span>
+              <el-dropdown-menu slot="dropdown">
+                <el-dropdown-item>
+                  <router-link :to="`/users/${name}`">マイページ</router-link>
+                </el-dropdown-item>
+                <el-dropdown-item>ログアウト</el-dropdown-item>
+              </el-dropdown-menu>
+            </el-dropdown>
+          </div>
         </div>
       </template>
 
+      <!-- ログイン前 -->
       <template v-else>
-        <div class="w__before-login pc-only">
-          <router-link to="/signup">新規登録</router-link>
-          <router-link to="/signin">ログイン</router-link>
+        <!-- desktop -->
+        <div class="pc-only">
+          <div class="navb">
+            <router-link to="/signin">ログイン</router-link>
+            <router-link to="/signup">新規登録</router-link>
+          </div>
         </div>
-        <div class="w__before-login tablet-only">
-          <el-dropdown trigger="click">
-            <div>
-              <i class="fas fa-user" />
+
+        <!-- tablet, mobile -->
+        <div class="tablet-only">
+          <div class="nav">
+            <div class="menu">
+              <el-dropdown trigger="click">
+                <span>
+                  <i class="fas fa-user" />
+                </span>
+                <el-dropdown-menu slot="dropdown">
+                  <el-dropdown-item>新規登録</el-dropdown-item>
+                  <el-dropdown-item>ログイン</el-dropdown-item>
+                </el-dropdown-menu>
+              </el-dropdown>
             </div>
-            <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item>
-                <router-link to="/signup">新規登録</router-link>
-              </el-dropdown-item>
 
-              <el-dropdown-item>
-                <router-link to="/signin">ログイン</router-link>
-              </el-dropdown-item>
-
-            </el-dropdown-menu>
-          </el-dropdown>
+          </div>
         </div>
       </template>
+
     </div>
   </div>
 </template>
@@ -79,23 +108,15 @@
 
 export default {
   name: 'Header',
-  props: {
-    logStatus: {
-      type: Boolean,
-      default: false,
-      required: false
-    },
-    userName: {
-      type: String,
-      default: null,
-      required: false
-    }
-  },
+  props: ['isAuth', 'name'],
   components: {},
   computed: {},
   methods: {
-    openSearch () {
-      this.$emit('openSearch')
+    toItemCreate () {
+      this.$router.push(`/users/${this.name}/items/create`)
+    },
+    toMyPage () {
+      this.$router.push(`/users/${this.name}`)
     }
   }
 }

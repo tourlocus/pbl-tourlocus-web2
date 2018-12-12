@@ -17,7 +17,9 @@
               <input
                 type="email"
                 name="email"
-                v-validate="'required'"
+                autocomplete="off"
+                v-model.trim="form.email"
+                v-validate="{required: true}"
               />
             </div>
             <div
@@ -34,6 +36,8 @@
               <input
                 type="password"
                 name="password"
+                autocomplete="off"
+                v-model.trim="form.password"
                 v-validate="'required'"
               />
             </div>
@@ -46,9 +50,10 @@
           </div>
 
           <div class="actionBtn">
-            <input
+            <el-input
               type="submit"
               value="ログイン"
+              v-loading="isLoading"
             />
           </div>
 
@@ -60,6 +65,9 @@
 </template>
 
 <script>
+import {User} from '../../api'
+import {mapActions} from 'vuex'
+
 export default {
   name: 'SingIn',
   data () {
@@ -67,13 +75,28 @@ export default {
       form: {
         email: '',
         password: ''
-      }
+      },
+      isLoading: false
     }
   },
   methods: {
+    ...mapActions('user', ['Login']),
+    updateIsLoading (v) {
+      this.isLoading = v
+    },
     handleSubmit () {
-      this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then(async result => {
         if (result) {
+          this.updateIsLoading(true)
+          await User.SignInRequest(this.form)
+            .then(res => {
+              this.updateIsLoading(false)
+              this.Login(res)
+            })
+            .catch(() => {
+              this.$message('ログインに失敗しました')
+              this.updateIsLoading(false)
+            })
         }
       })
     }

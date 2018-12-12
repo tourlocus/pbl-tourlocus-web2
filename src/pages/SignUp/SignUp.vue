@@ -7,8 +7,8 @@
         </div>
 
         <form
-          @submit.prevent="handleSubmit"
           class="form"
+          @submit.prevent="handleSubmit"
         >
           <div class="w__field">
             <label>ユーザー名</label>
@@ -99,6 +99,7 @@
                 type="text"
                 name="birthday"
                 placeholder="1996-04-01"
+                maxlength="10"
                 v-validate="'required|date_format:YYYY-MM-DD'"
                 autocomplete="off"
                 v-model.trim="form.birthday"
@@ -159,9 +160,10 @@
           </div>
 
           <div class="actionBtn">
-            <input
+            <el-input
               type="submit"
               value="登録する"
+              v-loading="isLoading"
             />
           </div>
 
@@ -172,6 +174,10 @@
 </template>
 
 <script>
+<<<<<<< HEAD
+=======
+import {User} from '../../api'
+>>>>>>> origin/release
 import {mapActions} from 'vuex'
 
 export default {
@@ -185,7 +191,8 @@ export default {
         birthday: '',
         gender: ''
       },
-      confirmPassword: ''
+      confirmPassword: '',
+      isLoading: false
     }
   },
   computed: {
@@ -226,11 +233,31 @@ export default {
     }
   },
   methods: {
+<<<<<<< HEAD
     ...mapActions('auth', ['signUp']),
+=======
+    ...mapActions('user', ['Login']),
+    updateIsLoading (v) {
+      this.isLoading = v
+    },
+>>>>>>> origin/release
     handleSubmit () {
-      this.$validator.validateAll().then(result => {
+      this.$validator.validateAll().then(async result => {
         if (result) {
+<<<<<<< HEAD
           this.signUp(this.form)
+=======
+          this.updateIsLoading(true)
+          await User.signUpRequest(this.form)
+            .then(res => {
+              this.updateIsLoading(false)
+              this.Login(res)
+            })
+            .catch(() => {
+              this.$message('新規登録に失敗しました。')
+              this.updateIsLoading(false)
+            })
+>>>>>>> origin/release
         }
       })
     }

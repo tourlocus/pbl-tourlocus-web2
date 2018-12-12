@@ -1,52 +1,66 @@
 <template>
-  <div class="p-itemEdit">
+  <div class="p-itemCreate">
     <div class="container">
       <div class="main">
-        <form
-          @submit.prevent="handleSubmit"
-          class="w__form"
-        >
 
-          <div class="w__field-tag">
+        <!-- ローディング -->
+        <template>
+          <el-container
+            v-loading.fullscreen="isLoading"
+          />
+        </template>
+
+        <!--  -->
+
+        <!-- フォーム -->
+        <form @submit.prevent="handleSubmit">
+
+          <!-- タグ -->
+          <div class="w-field_tag">
             <label>タグ</label>
-            <input-tag :limit="5" />
+            <vue-tags-input
+              v-model="tag"
+              :tags="form.tags"
+              :max-tags="3"
+              placeholder="地域に関することを3つまで"
+              @tags-changed="newTags => form.tags = newTags"
+            />
           </div>
 
-          <div class="w__field mt20mb20">
+          <!-- タイトル -->
+          <div class="w-field_title mtmb">
             <label>タイトル</label>
-            <div class="input">
-              <input
-                type="text"
-                name="title"
-                v-validate="'required'"
-              />
-            </div>
-            <div
-              class="form__errors"
-              v-if="errors.has('title')"
-            >
-              タイトルは必須です
-            </div>
+            <el-input
+              maxlength="30"
+              v-model.trim="form.title"
+              placeholder="〇〇に行ってきた。"
+            />
           </div>
 
-          <div class="w__field-file">
-            <label for="file" class="file">
-              ファイルを選択
+          <!-- ファイル -->
+          <div class="w-field_media">
+            <label for="file" class="w-file">
+              画像を選択
               <input
                 type="file"
-                name="file"
+                name="file[]"
                 id="file"
                 multiple
-                @change="handleChangeFile"
+                accept="image/*"
+                @change="handleFileSelect"
               />
             </label>
+
+            <!-- カルーセル -->
             <template v-if="images.length > 0">
               <el-carousel
-                class="mt20mb20"
+                class="mtmb"
+                :interval="15000"
+                indicator-position="outside"
               >
                 <el-carousel-item
-                  v-for="(image, index) in images"
-                  :key="index"
+                  v-for="(image, i) in images"
+                  :key="i"
                 >
                   <img :src="`${image}`" />
                 </el-carousel-item>
@@ -54,75 +68,128 @@
             </template>
           </div>
 
-          <div class="w__field mt20mb20">
+          <!-- 本文 -->
+          <div class="w-field_body mtmb">
             <label>本文</label>
-            <div class="input">
-              <textarea
-                name="content"
-                v-validate="'required'"
-              />
-            </div>
-            <div
-              class="form__error"
-              v-if="errors.has('content')"
-            >
-              本文は必須です
-            </div>
-          </div>
-
-          <div class="actionBtn">
-            <input
-              type="submit"
-              value="投稿する"
+            <el-input
+              v-model="form.content"
+              type="textarea"
             />
           </div>
 
+          <!-- サブミット -->
+          <div class="w-actionBtn">
+            <el-input
+              type="submit"
+              value="投稿する"
+              v-loading="isSubmitLoading"
+            />
+          </div>
         </form>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import InputTag from 'vue-input-tag'
+import {Item} from '../../../../api'
+import {Sleep, editResponseFormat} from '../../../../utils'
+import {mapState} from 'vuex'
+import VueTagsInput from '@johmun/vue-tags-input'
 
 export default {
-  name: 'ItemEdit',
+  name: 'ItemCreate',
   components: {
-    InputTag
+    VueTagsInput
   },
   data () {
     return {
-      images: []
+      form: {
+        tags: [],
+        title: '',
+        files: [],
+        content: ''
+      },
+      tag: '',
+      images: [],
+      isLoading: false,
+      isSubmitLoading: false
     }
   },
+  computed: {
+    ...mapState('user', {
+      cred: state => state
+    })
+  },
   methods: {
-    handleChangeFile (e) {
-      e.preventDefault()
+    updateIsLoading (v) {
+      this.isLoading = v
+    },
+    updateIsSubmitLoading (v) {
+      this.isSubmitLoading = v
+    },
+    // ファイルセレクト
+    handleFileSelect (e) {
+      const files = e.target.files
 
-      if (e.target.files.length !== 0) {
+      if (files.length !== 0) {
+        this.form.files.length = 0
         this.images.length = 0
-        const files = e.target.files
 
         for (let i = 0; i < files.length; i++) {
-          this.showImage(files[i])
+          this.readFile(files[i])
         }
       }
     },
-    showImage (file) {
-      const reader = new FileReader()
+    // ファイルの読み込み
+    readFile (file) {
       const vm = this
+      const reader = new FileReader()
+      this.form.files.push(file)
+
       reader.onload = e => {
         vm.images.push(e.target.result)
       }
       reader.readAsDataURL(file)
     },
+    // サブミット
     handleSubmit () {
-      this.$validator.validateAll().then(result => {
+      const id = this.$route.params.id
+      this.$validator.validateAll().then(async result => {
         if (result) {
+          this.updateIsSubmitLoading(true)
+          await Item.updateItem(this.cred, id, this.form)
+            .then(() => {
+              this.updateIsSubmitLoading(false)
+            })
+            .catch(() => {
+              this.$message('更新できませんでした。')
+              this.updateIsSubmitLoading(false)
+            })
         }
       })
     }
+  },
+  // 読み込み
+  async created () {
+    const id = this.$route.params.id
+    this.updateIsLoading(true)
+    await Item.getEdit(this.cred, id)
+      .then(async res => {
+        await Sleep(2000)
+        const s = editResponseFormat(res)
+        this.form.tags = s.tags
+        this.form.title = s.title
+        this.images = s.meida
+        this.form.content = s.content
+        this.updateIsLoading(false)
+      })
+      .catch(async () => {
+        await Sleep(2000)
+        this.updateIsLoading(false)
+        this.$message('記事を取得できませんでした')
+      })
   }
 }
 </script>

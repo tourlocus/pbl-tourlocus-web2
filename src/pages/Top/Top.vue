@@ -13,21 +13,14 @@
 </template>
 
 <script>
-import {Header as CommonHeader} from '../../layouts'
-import {SearchForm} from '../../components'
 
 export default {
   name: 'Top',
-  components: {
-    CommonHeader,
-    SearchForm
-  },
+  components: {},
   data () {
     return {}
   },
-  methods: {
-
-  }
+  methods: {}
 }
 </script>
 

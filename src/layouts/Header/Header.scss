@@ -10,6 +10,7 @@
 
 .title {
   display: flex;
+  margin-right: auto;
 
   a {
     font-size: 23px;
@@ -19,49 +20,62 @@
   }
 }
 
-.w__search-form {
-  padding: 4px 0;
+.nav {
+  display: flex;
+}
 
-  input {
-    height: 32px;
-    color: #555;
-    font-size: 16px;
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    outline: 0;
-    text-indent: 10px;
+.nava {
+  display: flex;
 
-    &:hover {
-      border-color: #072be3;
+  .w-icon__group {
+    span {
+      margin: 0 16px;
+      font-size: 26px;
+      color: #fff;
+      display: block;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:last-child {
+        margin-right: 20px;
+      }
+    }
+
+    .btn-group {
+      margin-right: 32px;
+    }
+
+    .icon-group {
+      display: flex;
     }
   }
 }
 
-
-.w__before-login.pc-only {
-  margin-left: auto;
-  padding: 8px 0;
+.navb {
+  padding-top: 8px;
 
   a {
     font-size: 16px;
     color: #fff;
     text-decoration: none;
-    text-shadow: 0 0 2px  rgba(136, 136, 136, 0.5);
-    
+
     &:first-child {
-      margin-right: 10px;
+      margin-right: 16px;
+    }
+
+    &:hover {
+      text-decoration: underline;
     }
   }
 }
 
-.w__before-login.tablet-only {
-  margin-left: auto;
-  padding: 8px 0;
-
-  i {
-    font-size: 16px;
+.menu {
+  span {
+    display: block;
+    font-size: 26px;
     color: #fff;
-    cursor: pointer;
   }
 }
 
@@ -80,17 +94,6 @@
   display: none;
 }
 
-.w__search-icon {
-  padding: 8px 0;
-
-  i {
-    font-size: 16px;
-    color: #fff;
-    text-shadow: 0 0 2px rgba(136, 136, 136, 0.5);
-    cursor: pointer;
-  }
-}
-
 @media only screen and (max-width: 991px) {}
 @media only screen and (max-width: 768px) {
   .pc-only {
@@ -98,5 +101,14 @@
   }
   .tablet-only {
     display: block;
+  }
+
+  .search {
+    .el-input {
+      width: 80px;
+    }
+    /deep/ .el-input__inner {
+      border-radius: 50px;
+    }
   }
 }
