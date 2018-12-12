@@ -268,7 +268,7 @@ export default {
       article_id: '1',
       presents: [
         {
-          present_name: '洋菓子',
+          present_type: '洋菓子',
           present_amount: '1',
           present_price: '1',
           required: '両親',
@@ -276,7 +276,7 @@ export default {
           photo: null
         },
         {
-          present_name: '洋菓子',
+          present_type: '洋菓子',
           present_amount: '2',
           present_price: '2',
           required: '友達',
@@ -284,7 +284,7 @@ export default {
           photo: null
         },
         {
-          present_name: '洋菓子',
+          present_type: '洋菓子',
           present_amount: '3',
           present_price: '3',
           required: '親戚',
@@ -368,7 +368,7 @@ export default {
       axios.post('http://localhost:3000/presents/create', {
         presents: [
           {
-            present_name: this.presents[0].present_name,
+            present_name: this.presents[0].present_type,
             present_amount: this.presents[0].present_amount,
             present_price: this.presents[0].present_price,
             required: this.presents[0].required,
@@ -377,7 +377,7 @@ export default {
             impression: this.presents[0].impression
           },
           {
-            present_name: this.presents[1].present_name,
+            present_name: this.presents[1].present_type,
             present_amount: this.presents[1].present_amount,
             present_price: this.presents[1].present_price,
             required: this.presents[1].required,
@@ -386,7 +386,7 @@ export default {
             impression: this.presents[1].impression
           },
           {
-            present_name: this.presents[2].present_name,
+            present_name: this.presents[2].present_type,
             present_amount: this.presents[2].present_amount,
             present_price: this.presents[2].present_price,
             required: this.presents[2].required,
@@ -402,19 +402,19 @@ export default {
       }).catch(err => {
         console.log('err:', err)
       })
-      // this.$validator.validateAll().then(async result => {
-      //   if (result) {
-      //     this.updateIsLoading(true)
-      //     await Item.createItem(this.cred, this.form)
-      //       .then(() => {
-      //         this.updateIsLoading(false)
-      //       })
-      //       .catch(() => {
-      //         this.$message('投稿できませんでした')
-      //         this.updateIsLoading(false)
-      //       })
-      //   }
-      // })
+      this.$validator.validateAll().then(async result => {
+        if (result) {
+          this.updateIsLoading(true)
+          await Item.createItem(this.cred, this.form)
+            .then(() => {
+              this.updateIsLoading(false)
+            })
+            .catch(() => {
+              this.$message('投稿できませんでした')
+              this.updateIsLoading(false)
+            })
+        }
+      })
     }
   }
 }
