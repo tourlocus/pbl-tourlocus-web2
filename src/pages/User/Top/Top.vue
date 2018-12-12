@@ -16,6 +16,8 @@
             :name="user.user_name"
             :icon="user.icon"
             :intro="user.intro"
+            :follow="user.follow"
+            :follower="user.follower"
             :me="me"
           />
 
@@ -74,6 +76,7 @@ export default {
       .then(async res => {
         await Sleep(2000)
         this.user = res
+        console.log(res)
         this.updateIsLoading(false)
       })
       .catch(async () => {

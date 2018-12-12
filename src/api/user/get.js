@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '../../router'
 
 export const getItems = async name => {
-  const endpoints = `users/${name}/items`
+  const endpoints = `users/${name}`
 
   try {
     const response = await axios({

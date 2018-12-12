@@ -2,6 +2,7 @@ import {
   Top,
   SignUp,
   SignIn,
+  SignOut,
   User,
   Setting,
   NotFound

@@ -7,5 +7,6 @@ export const User = {
   Top,
   Favorite,
   Followers,
-  Item
+  Item,
+  Present
 }
