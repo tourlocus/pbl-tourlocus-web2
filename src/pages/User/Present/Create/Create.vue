@@ -15,10 +15,10 @@
           <div class="cp_ipselect">
           <select class="cp_sl06" v-model="article_id">
             <option value="" hidden disabled selected></option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <option value="記事1">記事1</option>
+            <option value="記事2">記事2</option>
+            <option value="記事3">記事3</option>
+            <option value="記事4">記事4</option>
           </select>
           <span class="cp_sl06_highlight"></span>
           <span class="cp_sl06_selectbar"></span>
@@ -357,6 +357,7 @@ export default {
       }
     },
     handleSubmit () {
+      this.updateIsLoading(true)
       const form = new FormData()
       form.append('article_id', this.article_id)
       form.append('photo1', this.presents[0].photo)
@@ -398,22 +399,13 @@ export default {
         article_id: this.article_id
       }
       ).then(response => {
-        axios.post('http://localhost:3000/presents/create_image', form)
+        axios.post('http://localhost:3000/presents/create_image', form).then(response =>
+          {this.updateIsLoading(false)}).cach(err =>
+            {this.updateIsLoading(false)
+              console.log('err:', err)})
       }).catch(err => {
+        this.updateIsLoading(false)
         console.log('err:', err)
-      })
-      this.$validator.validateAll().then(async result => {
-        if (result) {
-          this.updateIsLoading(true)
-          await Item.createItem(this.cred, this.form)
-            .then(() => {
-              this.updateIsLoading(false)
-            })
-            .catch(() => {
-              this.$message('投稿できませんでした')
-              this.updateIsLoading(false)
-            })
-        }
       })
     }
   }

@@ -15,10 +15,10 @@
           <div class="cp_ipselect">
           <select class="cp_sl06" v-model="article_id">
             <option value="" hidden disabled selected></option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
+            <option value="記事1">記事1</option>
+            <option value="記事2">記事2</option>
+            <option value="記事3">記事3</option>
+            <option value="記事4">記事4</option>
           </select>
           <span class="cp_sl06_highlight"></span>
           <span class="cp_sl06_selectbar"></span>
@@ -357,18 +357,55 @@ export default {
       }
     },
     handleSubmit () {
-      this.$validator.validateAll().then(async result => {
-        if (result) {
-          this.updateIsLoading(true)
-          await Item.createItem(this.cred, this.form)
-            .then(() => {
-              this.updateIsLoading(false)
-            })
-            .catch(() => {
-              this.$message('投稿できませんでした')
-              this.updateIsLoading(false)
-            })
-        }
+      this.updateIsLoading(true)
+      const form = new FormData()
+      form.append('article_id', this.article_id)
+      form.append('photo1', this.presents[0].photo)
+      form.append('photo2', this.presents[1].photo)
+      form.append('photo3', this.presents[2].photo)
+
+      var status
+
+      axios.post('http://localhost:3000/presents/create', {
+        presents: [
+          {
+            present_name: this.presents[0].present_type,
+            present_amount: this.presents[0].present_amount,
+            present_price: this.presents[0].present_price,
+            required: this.presents[0].required,
+            impression: this.presents[0].impression,
+            image: "image1",
+            impression: this.presents[0].impression
+          },
+          {
+            present_name: this.presents[1].present_type,
+            present_amount: this.presents[1].present_amount,
+            present_price: this.presents[1].present_price,
+            required: this.presents[1].required,
+            impression: this.presents[1].impression,
+            image: "image2",
+            impression: this.presents[1].impression
+          },
+          {
+            present_name: this.presents[2].present_type,
+            present_amount: this.presents[2].present_amount,
+            present_price: this.presents[2].present_price,
+            required: this.presents[2].required,
+            impression: this.presents[2].impression,
+            image: "image3",
+            impression: this.presents[2].impression
+          }
+        ],
+        article_id: this.article_id
+      }
+      ).then(response => {
+        axios.post('http://localhost:3000/presents/create_image', form).then(response =>
+          {this.updateIsLoading(false)}).cach(err =>
+            {this.updateIsLoading(false)
+              console.log('err:', err)})
+      }).catch(err => {
+        this.updateIsLoading(false)
+        console.log('err:', err)
       })
     }
   },

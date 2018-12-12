@@ -22,6 +22,8 @@ const routes = [
   { path: '/users/:params/items/create', name: 'ItemCreate', component: User.Item.Create },
   { path: '/users/:params/items/edit/:id', name: 'ItemEdit', component: User.Item.Edit },
   { path: '/users/:params/items/:id', name: 'ItemDetail', component: User.Item.Detail },
+  { path: '/users/:params/presents/create', name: 'PresentCreate', component: User.Present.Create },
+  { path: '/users/:params/presents/edit/:id', name: 'PresentEdit', component: User.Present.Edit },
   { path: '/notfound', name: 'NotFound', component: NotFound },
   { path: '*', redirect: {name: 'NotFound'} }
 ]
