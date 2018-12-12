@@ -26,8 +26,8 @@
         </div>
 
         <div class="w-follow">
-          <p>フォロー</p>
-          <p>フォロワー</P>
+          <router-link :to="`/users/${me.name}/follow`">{{ follow }}フォロー</router-link>
+          <router-link :to="`/users/${me.name}/follower`">{{ follower }} フォロワー</router-link>
         </div>
 
       </div>
@@ -39,7 +39,7 @@
 <script>
 export default {
   name: 'UserProfileComponent',
-  props: ['name', 'icon', 'intro', 'me'],
+  props: ['name', 'icon', 'intro', 'me', 'follow', 'follower'],
   created () {
     console.log(this.param)
   }
