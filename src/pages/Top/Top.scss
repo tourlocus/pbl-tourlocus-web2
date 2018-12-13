@@ -12,3 +12,135 @@
   border-radius: 3px;
   box-shadow: 0 0 2px 0 rgba(136, 136, 136, 0.2);
 }
+
+
+.card {
+  margin: 10px 5px;
+  width: 307px;
+  height: 540px;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px #ccc;
+  display: inline-block;
+}
+
+.card-img {
+  border-radius: 5px 5px 0 0;
+  max-width: 100%;
+  height: auto;
+}
+
+.card-content {
+  padding: 5px 20px;
+  height: 240px;
+}
+
+.card-icon {
+  display: inline-block;
+  max-width: 20%;
+  position: relative;
+  right: 10px;
+}
+
+.username{
+  display: inline-block;
+  position: relative;
+  right: 5px;
+  color: #999;
+  bottom: 20px;
+  
+}
+
+.card-title {
+  font-size: 20px;
+  margin-top: 1px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+.card-text {
+  color: #777;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.card-link {
+  text-align: center;
+  border-top: 1px solid #eee;
+  padding: 20px;
+}
+
+.card-link a {
+  text-decoration: none;
+  color: #0bd;
+  margin: 0 10px;
+}
+
+.card-link a:hover {
+  color: #0090aa;
+}
+//ここからボタン設定
+.square_btn {
+  top: 5px;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 8px 10px 5px 10px;
+  text-decoration: none;
+  color: #FFA000;
+  background: #fff1da;
+  border-bottom: solid 4px #FFA000;
+  border-radius: 15px 15px 0 0;
+  transition: .4s;
+}
+
+.square_btn:hover {
+  background: #ffc25c;
+  color: #FFF;
+}
+
+.result {
+  color: #ffc25c;/*文字色*/
+  border-bottom: dashed 2px #ffc25c;
+  /*線の種類（点線）2px 線色*/
+  }
+
+  .season_btn {
+    text-align: center;
+    width: 25px;
+    position: relative;
+    display: inline-block;
+    font-weight: bold;
+    padding: 8px 10px 5px 10px;
+    text-decoration: none;
+    color: #FFA000;
+    background: #fff1da;
+    border-left: solid 4px #FFA000;
+    border-radius: 0 15px 15px 0;
+    transition: .4s;
+}
+
+.season_btn:hover {
+    background: #ffc25c;
+    color: #FFF;
+}
+
+.x_season_btn {
+  text-align: center;
+  width: 25px;
+  position: relative;
+  display: inline-block;
+  font-weight: bold;
+  padding: 8px 10px 5px 10px;
+  text-decoration: none;
+  color: #FFf;
+  background: #ffc25c;
+  border-left: solid 4px #FFA000;
+  border-radius: 0 15px 15px 0;
+  transition: .4s;
+}
+.filter {
+  color: #777;
+  margin: 0 10px;
+}
