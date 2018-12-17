@@ -1,8 +1,8 @@
 import axios from 'axios'
-import router from '../../router'
+// import router from '../../router'
 
 export const getItems = async name => {
-  const endpoints = `users/${name}`
+  const endpoints = `users/${name}/items`
 
   try {
     const response = await axios({
@@ -15,6 +15,5 @@ export const getItems = async name => {
       return result
     }
   } catch (error) {
-    router.push({name: 'NotFound'})
   }
 }

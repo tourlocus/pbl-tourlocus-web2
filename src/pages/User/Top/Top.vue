@@ -28,6 +28,13 @@
           >
             <el-tab-pane label="Items" name="Items">
               <!-- 自分の記事一覧 -->
+              <div v-for="(item, i) in user.articles" :key="i">
+                <item-card
+                  :item="item"
+                  :user="user"
+                  style="margin-bottom: 26px;"
+                />
+              </div>
             </el-tab-pane>
 
             <el-tab-pane label="Favorites" name="Favorites">
@@ -45,13 +52,15 @@
 <script>
 import {User} from '../../../api'
 import {UserProfile} from '../../../components'
+import ItemCard from '@/components/ItemCard/ItemCard'
 import {mapState} from 'vuex'
 import {Sleep} from '../../../utils'
 
 export default {
   name: 'MyPage',
   components: {
-    UserProfile
+    UserProfile,
+    ItemCard
   },
   data () {
     return {
