@@ -1,5 +1,5 @@
 import axios from 'axios'
-import router from '../../router'
+// import router from '../../router'
 
 // 編集画面
 export const getEdit = async (cred, id) => {
@@ -36,11 +36,11 @@ export const getDetail = async (name, id) => {
     if (response.status === 200) {
       const result = response.data
 
+      console.log(result)
       return result
     }
   } catch (error) {
     // レスポンスエラーがあった場合、NotFound
-    router.push({name: 'NotFound'})
     console.log(error)
   }
 }

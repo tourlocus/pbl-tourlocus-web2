@@ -41,7 +41,6 @@ export default {
   name: 'UserProfileComponent',
   props: ['name', 'icon', 'intro', 'me', 'follow', 'follower'],
   created () {
-    console.log(this.param)
   }
 }
 </script>
