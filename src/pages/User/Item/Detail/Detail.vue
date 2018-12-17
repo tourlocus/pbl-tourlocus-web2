@@ -30,7 +30,9 @@
                         <i class="fas fa-ellipsis-v" />
                       </span>
                       <el-dropdown-menu slot="dropdown">
-                        <el-dropdown-item>編集</el-dropdown-item>
+                        <el-dropdown-item>
+                          <router-link :to="`/users/${user.name}/items/edit/${item.id}`">集合</router-link>
+                        </el-dropdown-item>
                       </el-dropdown-menu>
                     </el-dropdown>
                   </div>
