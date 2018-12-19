@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '../../router'
 
 export const createItem = async (credential, values) => {
-  const endpoints = 'items/create'
+  const endpoints = 'articles/create'
   const tagArray = []
 
   for (let i = 0; i < values.tags.length; i++) {

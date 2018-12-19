@@ -64,7 +64,7 @@
                 <el-dropdown-item>
                   <router-link :to="`/users/${name}`">マイページ</router-link>
                 </el-dropdown-item>
-                <el-dropdown-item>ログアウト</el-dropdown-item>
+                <el-dropdown-item @click.native="logOut">ログアウト</el-dropdown-item>
               </el-dropdown-menu>
             </el-dropdown>
           </div>
@@ -105,18 +105,27 @@
 </template>
 
 <script>
+import {User} from '../../api'
+import {mapState, mapActions} from 'vuex'
 
 export default {
   name: 'Header',
   props: ['isAuth', 'name'],
   components: {},
-  computed: {},
+  computed: {
+    ...mapState(['user'])
+  },
   methods: {
+    ...mapActions('user', ['Logout']),
     toItemCreate () {
       this.$router.push(`/users/${this.name}/items/create`)
     },
     toMyPage () {
       this.$router.push(`/users/${this.name}`)
+    },
+    async logOut () {
+      await User.signOut(this.user)
+      this.Logout()
     }
   }
 }

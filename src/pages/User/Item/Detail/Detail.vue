@@ -160,7 +160,7 @@
 </template>
 
 <script>
-import {Item} from '../../../../api'
+import {Item, Favorite} from '../../../../api'
 import {Sleep} from '../../../../utils'
 import moment from 'moment'
 import {mapState} from 'vuex'
@@ -198,6 +198,10 @@ export default {
     },
     updateIsSubmitLoading (v) {
       this.isSubmitLoading = v
+    },
+    async updateFavorite (v) {
+      const reValue = await Favorite.updateFavorite(this.user, this.Item.id, v)
+      this.Item.status = reValue
     }
   },
   async created () {
@@ -208,6 +212,7 @@ export default {
       .then(async res => {
         await Sleep(2000)
         this.item = res
+        console.log(res)
         this.updateIsLoading(false)
       })
       .catch(async () => {

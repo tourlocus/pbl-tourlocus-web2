@@ -9,6 +9,7 @@ export default {
     const responseData = values.data
 
     const payloadValue = {
+      id: responseData.data.id,
       name: responseData.data.name,
       accessToken: responseHeader['access-token'],
       uid: responseHeader['uid'],
@@ -18,5 +19,10 @@ export default {
 
     commit(types.LOGIN, payloadValue)
     router.push(`/users/${responseData.data.name}`)
+  },
+
+  // ログアウト
+  Logout ({ commit }) {
+    commit(types.LOGOUT)
   }
 }

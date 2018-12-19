@@ -27,7 +27,7 @@ export const getEdit = async (cred, id) => {
 // 詳細画面
 export const getDetail = async (name, id) => {
   try {
-    const endpoints = 'items/show/'
+    const endpoints = 'articles/'
     const response = await axios({
       url: `${process.env.NODE_BACKEND}${endpoints}${name}/${id}`,
       method: 'GET'
@@ -36,11 +36,29 @@ export const getDetail = async (name, id) => {
     if (response.status === 200) {
       const result = response.data
 
-      console.log(result)
       return result
     }
   } catch (error) {
-    // レスポンスエラーがあった場合、NotFound
-    console.log(error)
+    throw new Error(error)
+  }
+}
+
+// トップページ
+export const getItemLists = async () => {
+  const resource = 'articles'
+
+  try {
+    const response = await axios({
+      url: `${process.env.NODE_BACKEND}${resource}`,
+      method: 'GET'
+    })
+
+    if (response.status === 200) {
+      const result = response.data
+
+      return result
+    }
+  } catch (error) {
+    throw new Error(error)
   }
 }
