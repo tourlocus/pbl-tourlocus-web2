@@ -19,9 +19,16 @@
 <script>
 export default {
   name: 'ItemCard',
-  methods: {
+  props: {
+    'id': {},
+    'username': {},
+    'icon': {},
+    'photo': {},
+    'title': {},
+    'content': {}
   }
 }
+
 </script>
 
 <style lang="scss" scoped>

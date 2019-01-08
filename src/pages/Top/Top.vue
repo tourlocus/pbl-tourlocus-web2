@@ -9,6 +9,11 @@
         </div>
         <ItemCard v-for="item in articles"
         v-bind:key="item.id"
+        :username="item.username"
+        :icon="item.icon"
+        :photo="item.photo"
+        :title="item.title"
+        :content="item.content"
         >
         </ItemCard>
       </div>
@@ -39,16 +44,16 @@ export default {
           content: '本文'
         },
         {
-          id: '1',
-          username: 'hogehoge',
+          id: '2',
+          username: 'sample',
           icon: 'sample.png',
           photo: 'sample.jpg',
           title: 'タイトル',
           content: '本文'
         },
         {
-          id: '1',
-          username: 'hogehoge',
+          id: '3',
+          username: 'sample2',
           icon: 'sample.png',
           photo: 'sample.jpg',
           title: 'タイトル',
