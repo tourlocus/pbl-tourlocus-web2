@@ -79,6 +79,17 @@
   }
 }
 
+.w__after-login {
+  margin-left: auto;
+  padding: 6px 0;
+
+  .after-button {
+    cursor: pointer;
+    font-size: 16px;
+    color: #fff;
+  }
+}
+
 .tablet-only {
   display: none;
 }
