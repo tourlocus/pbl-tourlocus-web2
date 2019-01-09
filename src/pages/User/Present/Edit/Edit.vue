@@ -50,7 +50,6 @@
           <label class="cp_sl06_selectlabel">送る相手</label>
           </div>
 
-
           <div class="amount">
             <label>人数</label>
             <div class="input">
@@ -278,7 +277,7 @@ export default {
           required: '',
           impression: '',
           photo: ''
-        },
+        }
       ],
       form2: false,
       form3: false

@@ -337,12 +337,12 @@ export default {
       }
     },
     handleSubmit () {
-      console.log("data" + this.presents)
+      console.log('data' + this.presents)
       axios({
-        method : 'POST',
-        url    : 'http://localhost:3000/presents/create',
-        data   : this.presents
-      }).then(response => console.log(response.status));
+        method: 'POST',
+        url: 'http://localhost:3000/presents/create',
+        data: this.presents
+      }).then(response => console.log(response.status))
     }
   }
 }

@@ -9,6 +9,8 @@
         </div>
         <ItemCard v-for="item in articles"
         v-bind:key="item.id"
+        :id="item.id"
+        :userid="item.user_id"
         :username="item.username"
         :icon="item.icon"
         :photo="item.photo"
@@ -24,7 +26,7 @@
 <script>
 import {Header as CommonHeader} from '../../layouts'
 import {SearchForm, ItemCard} from '../../components'
-
+import Axios from 'axios'
 export default {
   name: 'Top',
   components: {
@@ -35,34 +37,18 @@ export default {
   data () {
     return {
       articles: [
-        {
-          id: '1',
-          username: 'hogehoge',
-          icon: 'sample.png',
-          photo: 'sample.jpg',
-          title: 'タイトル',
-          content: '本文'
-        },
-        {
-          id: '2',
-          username: 'sample',
-          icon: 'sample.png',
-          photo: 'sample.jpg',
-          title: 'タイトル',
-          content: '本文'
-        },
-        {
-          id: '3',
-          username: 'sample2',
-          icon: 'sample.png',
-          photo: 'sample.jpg',
-          title: 'タイトル',
-          content: '本文'
-        }
-      ]
+      ],
+      favorite: 'false'
     }
   },
   methods: {
+  },
+  created: function () {
+    const self = this
+    Axios.get('http://localhost:3000/articles')
+      .then((res) => {
+        self.articles = res.data
+      })
   }
 }
 </script>

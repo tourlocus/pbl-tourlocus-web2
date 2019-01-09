@@ -1,8 +1,8 @@
 <template>
     <section class="card">
-        <img class="card-img" src="" alt="">
+        <img class="card-img" src="img" alt="">
         <div class="card-content">
-            <img class="card-icon" src="">
+            <img class="card-icon" v-show="icon" :src="icon">
             <div class="username">
                 {{username}}
             </div>
@@ -10,8 +10,7 @@
             <p class="card-text">{{content}}</p>
         </div>
         <div class="card-link">
-            <a href="http://localhost:8080/"></a>
-            <a href="#">もっと見る</a>
+            <router-link :to="'/articles/' + id">もっと見る</router-link>
         </div>
     </section>
 </template>
