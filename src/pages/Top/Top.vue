@@ -59,6 +59,17 @@ export default {
           content: '東京に行ってきた',
           created_at: '2018-12-06-xxx-xxx',
           updated_at: '2018-12-06-xxx-xxx'
+        },
+        {
+          id: 2,
+          user_id: 3,
+          user_icon: 'sample.png',
+          user_name: 'hoge',
+          media: 'sample.jpeg',
+          title: '東京に行ってきた',
+          content: '東京に行ってきた',
+          created_at: '2018-12-06-xxx-xxx',
+          updated_at: '2018-12-06-xxx-xxx'
         }
       ],
       popular: [
@@ -72,11 +83,11 @@ export default {
           content: '大阪に行ってきた',
           created_at: '2018-12-06-xxx-xxx',
           updated_at: '2018-12-06-xxx-xxx'
-        },
+        }
       ],
       favorite: false
     }
-  },
+  },  
   methods: {
     ChangePopular: function () {
       if (this.favorite === false) {
@@ -89,14 +100,14 @@ export default {
       }
     }
   },
-  // created: function () {
-  //   const self = this
-  //   Axios.get('http://localhost:3000/articles')
-  //     .then((res) => {
-  //       self.items = res.items
-  //       self.popular = res.popular
-  //     })
-  // }
+  created: function () {
+    const self = this
+    Axios.get('http://localhost:3000/articles')
+      .then((res) => {
+        self.items = res.data.items
+        self.popular = res.data.popular
+      })
+  }
 }
 </script>
 
