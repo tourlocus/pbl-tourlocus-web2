@@ -4,16 +4,28 @@
       <div class="main">
 
         <div class="tabs">
-          <a href="#" class="square_btn">新着順</a>
-          <a href="#" class="square_btn">人気順</a>
+          <a href="#" class="square_btn" v-on:click="ChangeNew" >新着順</a>
+          <a href="#" class="square_btn" v-on:click="ChangePopular">人気順</a>
         </div>
-        <ItemCard v-for="item in articles"
-        v-bind:key="item.id"
+        <ItemCard v-show="favorite == false" v-for="item in items"
+        v-bind:key="item.length"
         :id="item.id"
-        :userid="item.user_id"
-        :username="item.username"
-        :icon="item.icon"
-        :photo="item.photo"
+        :user_id="item.user_id"
+        :user_name="item.user_name"
+        :user_icon="item.user_icon"
+        :media="item.media"
+        :title="item.title"
+        :content="item.content"
+        >
+        </ItemCard>
+
+        <ItemCard v-show="favorite == true" v-for="item in popular"
+        v-bind:key="item.length"
+        :id="item.id"
+        :user_id="item.user_id"
+        :user_name="item.user_name"
+        :user_icon="item.user_icon"
+        :media="item.media"
         :title="item.title"
         :content="item.content"
         >
@@ -36,20 +48,55 @@ export default {
   },
   data () {
     return {
-      articles: [
+      items: [
+        {
+          id: 1,
+          user_id: 3,
+          user_icon: 'sample.png',
+          user_name: 'hoge',
+          media: 'sample.jpeg',
+          title: '東京に行ってきた',
+          content: '東京に行ってきた',
+          created_at: '2018-12-06-xxx-xxx',
+          updated_at: '2018-12-06-xxx-xxx'
+        }
       ],
-      favorite: 'false'
+      popular: [
+        {
+          id: 1,
+          user_id: 1,
+          user_icon: 'sample.png',
+          user_name: 'hoge',
+          media: 'sample.jpeg',
+          title: '大阪に行ってきた',
+          content: '大阪に行ってきた',
+          created_at: '2018-12-06-xxx-xxx',
+          updated_at: '2018-12-06-xxx-xxx'
+        },
+      ],
+      favorite: false
     }
   },
   methods: {
+    ChangePopular: function () {
+      if (this.favorite === false) {
+        this.favorite = true
+      }
+    },
+    ChangeNew: function () {
+      if (this.favorite === true) {
+        this.favorite = false
+      }
+    }
   },
-  created: function () {
-    const self = this
-    Axios.get('http://localhost:3000/articles')
-      .then((res) => {
-        self.articles = res.data
-      })
-  }
+  // created: function () {
+  //   const self = this
+  //   Axios.get('http://localhost:3000/articles')
+  //     .then((res) => {
+  //       self.items = res.items
+  //       self.popular = res.popular
+  //     })
+  // }
 }
 </script>
 

@@ -2,9 +2,9 @@
     <section class="card">
         <img class="card-img" src="img" alt="">
         <div class="card-content">
-            <img class="card-icon" v-show="icon" :src="icon">
+            <img class="card-icon" v-show="user_icon" :src="user_icon">
             <div class="username">
-                {{username}}
+                {{user_name}}
             </div>
             <h1 class="card-title">{{title}}</h1>
             <p class="card-text">{{content}}</p>
@@ -20,9 +20,10 @@ export default {
   name: 'ItemCard',
   props: {
     'id': {},
-    'username': {},
-    'icon': {},
-    'photo': {},
+    'user_id': {},
+    'user_name': {},
+    'user_icon': {},
+    'media': {},
     'title': {},
     'content': {}
   }
