@@ -48,43 +48,8 @@ export default {
   },
   data () {
     return {
-      items: [
-        {
-          id: 1,
-          user_id: 3,
-          user_icon: 'sample.png',
-          user_name: 'hoge',
-          media: 'sample.jpeg',
-          title: '東京に行ってきた',
-          content: '東京に行ってきた',
-          created_at: '2018-12-06-xxx-xxx',
-          updated_at: '2018-12-06-xxx-xxx'
-        },
-        {
-          id: 2,
-          user_id: 3,
-          user_icon: 'sample.png',
-          user_name: 'hoge',
-          media: 'sample.jpeg',
-          title: '東京に行ってきた',
-          content: '東京に行ってきた',
-          created_at: '2018-12-06-xxx-xxx',
-          updated_at: '2018-12-06-xxx-xxx'
-        }
-      ],
-      popular: [
-        {
-          id: 1,
-          user_id: 1,
-          user_icon: 'sample.png',
-          user_name: 'hoge',
-          media: 'sample.jpeg',
-          title: '大阪に行ってきた',
-          content: '大阪に行ってきた',
-          created_at: '2018-12-06-xxx-xxx',
-          updated_at: '2018-12-06-xxx-xxx'
-        }
-      ],
+      items: [],
+      popular: [],
       favorite: false
     }
   },

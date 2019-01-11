@@ -13,7 +13,6 @@
         </div>
         <div class="card-link">
             <router-link :to="'/users/' + user_name + '/items/' + id">もっと見る</router-link>
-        
         </div>
     </section>
 </template>
