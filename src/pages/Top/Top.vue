@@ -87,7 +87,7 @@ export default {
       ],
       favorite: false
     }
-  },  
+  },
   methods: {
     ChangePopular: function () {
       if (this.favorite === false) {
