@@ -1,6 +1,6 @@
 <template>
     <section class="card">
-        <img class="card-img" src="'http://localhost:3000/public/uploads/'' + media" alt="">
+        <img class="card-img" v-show="media" :src="media">
         <div class="card-content">
             <img class="card-icon" v-show="user_icon" :src="user_icon">
             <div class="username">
