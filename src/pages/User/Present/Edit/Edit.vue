@@ -95,6 +95,7 @@
 <script>
 import axios from 'axios'
 import {Sleep} from '../../../../utils'
+import {mapState} from 'vuex'
 
 export default {
   name: 'EditPresent',
@@ -113,6 +114,11 @@ export default {
       image: '',
       isLoading: false
     }
+  },
+  computed: {
+    ...mapState('user', {
+      cred: state => state
+    })
   },
   methods: {
     updateIsLoading (v) {
@@ -150,6 +156,12 @@ export default {
           await axios({
             url: `http://localhost:3000/presents/update`,
             method: 'PUT',
+            headers: {
+              client: this.cred.client,
+              uid: this.cred.uid,
+              'access-token': this.cred.accessToken,
+              'Content-Type': 'multipart/form-data'
+            },
             data: form
           })
           .then(() => {
@@ -164,16 +176,15 @@ export default {
       })
     }
   },
-  async created (credential) {
+  async created () {
     this.updateIsLoading(true)
     await axios({
       url: `http://localhost:3000/presents/edit/${this.$route.params.id}`,
       method: 'GET',
       headers: {
-        client: credential.client,
-        uid: credential.uid,
-        'access-token': credential.accessToken,
-        'Content-Type': 'multipart/form-data'
+        client: this.cred.client,
+        uid: this.cred.uid,
+        'access-token': this.cred.accessToken
       },
     })
       .then(async res => {

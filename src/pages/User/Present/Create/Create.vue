@@ -113,6 +113,7 @@
 <script>
 import axios from 'axios'
 import {Sleep} from '../../../../utils'
+import {mapState} from 'vuex'
 
 export default {
   name: 'CreatePresent',
@@ -173,6 +174,12 @@ export default {
           await axios({
             url: `${process.env.NODE_BACKEND}/presents/create`,
             method: 'POST',
+            headers: {
+              client: this.cred.client,
+              uid: this.cred.uid,
+              'access-token': this.cred.accessToken,
+              'Content-Type': 'multipart/form-data'
+            },
             data: form
           })
             .then(() => {
@@ -187,11 +194,16 @@ export default {
       })
     }
   },
-  async created (credential) {
+  async created () {
     this.updateIsLoading(true)
     await axios({
       url: `http://localhost:3000/presents/new`,
-      method: 'GET'
+      method: 'GET',
+      headers: {
+        client: this.cred.client,
+        uid: this.cred.uid,
+        'access-token': this.cred.accessToken
+      }
     })
     .then(async res => {
       this.articles = res.data.articles
