@@ -193,7 +193,7 @@
 
 /*
 |-----------------------------------
-| present
+| お土産情報
 |-----------------------------------
 */
 .present_main {
@@ -207,16 +207,17 @@
     padding: 1px 0;
   }
 
+  h2 {
+    color: #555;
+    text-align: center;
+  }
+
   .present_image {
     text-align: center;
     img {
       width: auto;
       height: 300px;
     }
-  }
-
-  /deep/ .present_title {
-    text-align: center;
   }
 
   .present_required {
