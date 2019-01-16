@@ -205,15 +205,15 @@ export default {
         'access-token': this.cred.accessToken
       }
     })
-    .then(async res => {
-      this.articles = res.data.articles
-      this.updateIsLoading(false)
-    })
-    .catch(async res => {
-      await Sleep(2000)
-      this.updateIsLoading(false)
-      this.$message('記事を取得できませんでした')
-    })
+      .then(async res => {
+        this.articles = res.data.articles
+        this.updateIsLoading(false)
+      })
+      .catch(async res => {
+        await Sleep(2000)
+        this.updateIsLoading(false)
+        this.$message('記事を取得できませんでした')
+      })
   }
 }
 </script>

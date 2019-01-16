@@ -164,14 +164,14 @@ export default {
             },
             data: form
           })
-          .then(() => {
-            this.$message('更新しました。')
-            this.updateIsSubmitLoading(false)
-          })
-          .catch(() => {
-            this.$message('更新できませんでした。')
-            this.updateIsSubmitLoading(false)
-          })
+            .then(() => {
+              this.$message('更新しました。')
+              this.updateIsSubmitLoading(false)
+            })
+            .catch(() => {
+              this.$message('更新できませんでした。')
+              this.updateIsSubmitLoading(false)
+            })
         }
       })
     }
@@ -185,7 +185,7 @@ export default {
         client: this.cred.client,
         uid: this.cred.uid,
         'access-token': this.cred.accessToken
-      },
+      }
     })
       .then(async res => {
         this.presents.present_name = res.data.present_name

@@ -44,7 +44,7 @@
   .dislike {
     i {
       color: rgba(1, 1, 1, 0.2);
-      
+
       &:hover {
         cursor: pointer;
       }
@@ -59,7 +59,7 @@
     display: inline-block;
     text-decoration: none;
     color: #555;
-    
+
     img {
       width: 40px;
       height: 40px;
@@ -193,6 +193,57 @@
 
 /*
 |-----------------------------------
+| present
+|-----------------------------------
+*/
+.present_main {
+  padding: 32px 20px 80px;
+  background-color: #fff;
+  border-radius: 3px;
+  margin: 0px 100px;
+
+  p {
+    color: #555;
+    padding: 1px 0;
+  }
+
+  .present_image {
+    text-align: center;
+    img {
+      width: auto;
+      height: 300px;
+    }
+  }
+
+  /deep/ .present_title {
+    text-align: center;
+  }
+
+  .present_required {
+    font-size: 20px;
+  }
+
+  .present_name {
+      background-color: #ffbf7f;
+      color: #fff;
+      padding: 2px 10px;
+  }
+
+  .present_amount {
+    display: inline;
+  }
+
+  .present_price {
+    padding-left: 80px;
+  }
+
+  .present_impression {
+
+  }
+}
+
+/*
+|-----------------------------------
 | util
 |-----------------------------------
 */
@@ -224,4 +275,3 @@
     }
   }
 }
-
