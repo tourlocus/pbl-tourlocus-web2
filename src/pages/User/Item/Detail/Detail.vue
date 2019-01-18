@@ -115,14 +115,17 @@
           <template v-if="item.present != null">
             <div class="present_main">
               <h2>お土産情報</h2>
-              <div class="present_image"><img :src="`http://localhost:3000/uploads/${item.present.photo}`" /></div>
-              <p><span class="present_required">{{ item.present.required }}</span>へのお土産</p>
-              <p><span class="present_name">{{ item.present.present_name }}</span></p>
-              <p class="present_amount">人数：{{ item.present.present_amount }}人
-              <span class="present_price">{{ item.present.present_price }}円</span></p>
-              <p class="present_impression">{{ item.present.impression }}</p>
+              <img :src="`http://localhost:3000/uploads/${item.present.photo}`" />
+              <div class="present_info">
+                <p>種類：<span class="present_required">{{ item.present.present_name }}</span></p>
+                <p>相手：<span class="present_required">{{ item.present.required }}</span></p>
+                <p>人数：{{ item.present.present_amount }}人</p>
+                <p>値段：{{ item.present.present_price }}円</p>
+                <p class="present_impression">{{ item.present.impression}}</p>
+              </div>
             </div>
           </template>
+
 
         </div>
 
